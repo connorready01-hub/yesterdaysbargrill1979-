@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yesterday's Bar &amp; Grill — Bryan, Texas | A Fine Entertainment Establishment</title>
+<meta name="description" content="Yesterday's Bar & Grill in Bryan, Texas — patio bar and grill with pool, darts, shuffleboard, karaoke Wednesdays, live music Fridays, weekend brunch and a full food & cocktail menu. Open Mon–Fri 11am–2am, Sat–Sun 10am–2am.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23f7f0e2%22/><path d=%22M30 35h35v38a8 8 0 0 1-8 8H38a8 8 0 0 1-8-8z%22 fill=%22none%22 stroke=%22%23a53a26%22 stroke-width=%226%22/><path d=%22M65 42h10a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8H65%22 fill=%22none%22 stroke=%22%23a53a26%22 stroke-width=%226%22/></svg>">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://themaroonmania-gif.github.io/conman/">
+<meta property="og:title" content="Yesterday's Bar & Grill — Bryan, Texas">
+<meta property="og:description" content="A fine entertainment establishment — patio bar and grill with pool, darts, shuffleboard, karaoke Wednesdays, live music Fridays and weekend brunch. Open Mon–Fri 11am–2am, Sat–Sun 10am–2am.">
+<meta property="og:image" content="https://themaroonmania-gif.github.io/conman/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yesterday's Bar & Grill — Bryan, Texas">
+<meta name="twitter:description" content="A fine entertainment establishment — patio bar and grill with pool, darts, shuffleboard, karaoke Wednesdays, live music Fridays and weekend brunch.">
+<meta name="twitter:image" content="https://themaroonmania-gif.github.io/conman/assets/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:ital,wght@0,600;1,500;1,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ TODAY'S DEALS POPUP ============ -->
+<div class="deals-popup" id="dealsPopup">
+  <div class="deals-popup__card">
+    <button class="deals-popup__close" id="dealsPopupClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="deals-popup__eyebrow" id="dealsPopupEyebrow">Today's Deals</div>
+    <h3 class="deals-popup__title" id="dealsPopupTitle"></h3>
+    <ul class="deals-popup__list" id="dealsPopupList"></ul>
+    <a href="#specials" data-tab="specials" class="deals-popup__link" id="dealsPopupLink">See all Daily Deals</a>
+  </div>
+</div>
+<button class="deals-fab" id="dealsFab" aria-label="Show today's deals">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h11v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M16 10h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/></svg>
+  <span>Today's Deals</span>
+</button>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#home" class="nav__logo">
+    <img src="assets/logo.png" alt="Yesterday's Bar & Grill logo">
+    <span>Yesterdays Bar & Grill</span>
+  </a>
+  <div class="nav__links" id="navLinks">
+    <a href="#about" data-tab="about">About</a>
+    <a href="#specials" data-tab="specials">Daily Deals</a>
+    <a href="#menu" data-tab="menu">Menu</a>
+    <a href="#games" data-tab="games">Activities</a>
+    <a href="#gallery" data-tab="gallery">Gallery</a>
+    <a href="#visit" data-tab="visit">Visit</a>
+    <a href="#social-feed" data-tab="social-feed">Facebook</a>
+  </div>
+  <div class="nav__cta">
+    <a href="#visit" data-tab="visit" class="btn btn-ghost" style="padding:.6em 1.3em; font-size:.9rem;">Get Directions</a>
+  </div>
+  <button class="nav__burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu__close" id="closeMobileMenu" aria-label="Close menu">&times;</button>
+  <a href="#about" data-tab="about">About</a>
+  <a href="#specials" data-tab="specials">Daily Deals</a>
+  <a href="#menu" data-tab="menu">Menu</a>
+  <a href="#games" data-tab="games">Activities</a>
+  <a href="#gallery" data-tab="gallery">Gallery</a>
+  <a href="#visit" data-tab="visit">Visit</a>
+  <a href="#social-feed" data-tab="social-feed">Facebook</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <div class="hero__bg-photo">
+    <img id="heroPhoto" src="assets/hero-storefront.avif" alt="Yesterday's Bar & Grill storefront" loading="eager"
+      onload="document.getElementById('home').classList.add('hero--photo')"
+      onerror="this.style.display='none'">
+  </div>
+  <div class="hero__glow-orb o1"></div>
+  <div class="hero__glow-orb o2"></div>
+  <div class="hero__glow-orb o3"></div>
+
+  <div class="hero__content">
+    <div class="hero__logo-badge">
+      <img src="assets/logo.png" alt="Yesterday's Bar & Grill logo" class="hero__logo-mark">
+    </div>
+    <div class="hero__kicker">Bryan, Texas · Serving Since 1979</div>
+    <h1 class="hero__wordmark">Bar &amp; Grill</h1>
+    <p class="hero__tagline">"<strong>A fine entertainment establishment</strong>" — Busiest neighborhood bar. Outdoor patio, cold beer, pool, darts, shuffleboard, karaoke and a menu that doesn't mess around.</p>
+    <div class="hero__ctas">
+      <a href="#menu" data-tab="menu" class="btn btn-primary">View The Menu</a>
+      <a href="#visit" data-tab="visit" class="btn btn-ghost">Get Directions</a>
+    </div>
+
+    <div class="hero__infobar">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Mon–Fri 11am–2am · Sat–Sun 10am–2am</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>4421 S. Texas Ave, Bryan TX</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(979) 846-2625</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee__track" id="marqueeTrack">
+    <span><b>Free Pool</b> Sundays until 2pm</span>
+    <span>Karaoke every <b>Wednesday</b> 8pm</span>
+    <span>Live Music <b>Fridays</b> 8–11pm</span>
+    <span><b>Brunch</b> Sat &amp; Sun 10am–2pm</span>
+    <span>Sunday Funday w/ <b>DJ Rob</b> 1–4pm</span>
+  </div>
+</div>
+
+<!-- ============ FACEBOOK / FOLLOW US ============ -->
+<section id="social-feed" class="fb-feed page-section">
+  <div class="container">
+    <div class="fb-feed__card reveal">
+      <div class="fb-feed__main">
+        <img class="fb-feed__logo" src="assets/logo.png" alt="Yesterday's Bar & Grill logo">
+        <div class="eyebrow">Straight From The Source</div>
+        <h2>Follow Us On Facebook</h2>
+        <p>Daily specials, event announcements, and photos get posted to Facebook first — follow along so you never miss a deal.</p>
+        <div class="fb-feed__buttons">
+          <a class="btn btn-primary" href="https://www.facebook.com/pages/Yesterdays-Bar-Grill/136270043220222" target="_blank" rel="noopener">Follow on Facebook</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/yesterdays_bar" target="_blank" rel="noopener">Follow on Instagram</a>
+        </div>
+        <div class="ref-row" style="margin-top:1.6rem;">
+          <a class="ref-chip" href="https://www.google.com/maps/search/?api=1&query=Yesterday%27s+Bar+%26+Grill+4421+South+Texas+Avenue+Bryan+TX+77802" target="_blank" rel="noopener"><b>4.3★</b> Google (590)</a>
+          <a class="ref-chip" href="https://www.yelp.com/biz/yesterdays-bar-and-grill-bryan" target="_blank" rel="noopener"><b>3.3★</b> Yelp (55)</a>
+        </div>
+      </div>
+      <div class="fb-feed__schedule">
+        <span class="fb-feed__schedule-label">This Week At Yesterday's</span>
+        <ul>
+          <li><b>Mon</b><span>SINGO Night — musical bingo</span></li>
+          <li><b>Tue</b><span>Free pool w/ college ID · $15 BOGO burger</span></li>
+          <li><b>Wed</b><span>Karaoke Night, 8pm · ½ off apps</span></li>
+          <li><b>Thu</b><span>$1 Wings · $5 select liquors</span></li>
+          <li><b>Fri</b><span>Live Music, 8–11pm (fall semester)</span></li>
+          <li><b>Sat–Sun</b><span>Brunch 10am–2pm</span></li>
+          <li><b>Sun</b><span>Free pool til 2pm · DJ Rob 1–4pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div id="fbLiveEmbed" class="fb-feed__live" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="about page-section">
+  <div class="container about__grid">
+    <div class="about__copy reveal">
+      <div class="eyebrow">Our Story</div>
+      <h2>The Busiest Pub<br>in Bryan, Texas</h2>
+      <p>Since 1979, Yesterday's has been the bar &amp; grill everybody ends up at — a sprawling patio, a full house on Wednesdays, and regulars who've had the same seat at the rail for years. It's the kind of place where the pool table's always got next, the wing sauce list runs eight deep, and the bartender already knows your order.</p>
+      <p>Sun-up specials, late-night karaoke, Friday night bands during the fall semester, and a Sunday brunch crowd that never wants to leave — Yesterday's does double duty as your lunch spot, your Friday night, and your Sunday cure, all on the same patio.</p>
+      <div class="about__stats">
+        <div class="stat">
+          <span class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <b>Mon–Fri</b><span>11am – 2am</span>
+        </div>
+        <div class="stat">
+          <span class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="16" r="5"/><circle cx="8" cy="16" r="1.6" fill="currentColor" stroke="none"/><path d="M11 12.5 18 4"/><rect x="16.3" y="1.8" width="3" height="4" rx="1" transform="rotate(40 17.8 3.8)"/></svg></span>
+          <b>Activities</b><span>Pool · Darts · Shuffleboard</span>
+        </div>
+        <div class="stat">
+          <span class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/><path d="M8 22h8"/></svg></span>
+          <b>Wed</b><span>Karaoke Night, 8pm</span>
+        </div>
+        <div class="stat">
+          <span class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></span>
+          <b>Fri</b><span>Live Music, 8–11pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="about__visual reveal">
+      <div class="about__collage">
+        <img class="collage__img collage__img--main" src="assets/gallery/gallery-06.png" alt="Guests smiling on the patio" loading="lazy" onerror="this.closest('.collage__img').style.display='none'">
+        <img class="collage__img collage__img--top" src="assets/gallery/gallery-49.png" alt="Burger and fries with a Budweiser draft beer" loading="lazy" onerror="this.style.display='none'">
+        <img class="collage__img collage__img--bottom" src="assets/patio.jpg" alt="Yesterday's Bar & Grill patio seating" loading="lazy" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DAILY DEALS SPECIALS ============ -->
+<section id="specials" class="specials page-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Sunday – Thursday</div>
+      <h2>Daily Deals, All Day</h2>
+      <p>No clock-watching required — these run all day, every time.</p>
+    </div>
+
+    <div class="specials__grid" id="specialsGrid">
+      <div class="day-card reveal" data-day="0">
+        <span class="tag">Sunday</span>
+        <h4>Funday</h4>
+        <ul>
+          <li><b>$10</b> Mimosa Pitcher</li>
+          <li><b>$4.50</b> House Bloody Mary</li>
+          <li><b>$1</b> Hotdogs</li>
+          <li>Free pool til 2pm · DJ Rob 1–4pm</li>
+        </ul>
+      </div>
+      <div class="day-card reveal" data-day="1">
+        <span class="tag">Monday</span>
+        <h4>Singo Night</h4>
+        <ul>
+          <li><b>$4</b> Domestic Drafts + Freezer Shots</li>
+          <li><b>$2</b> Footlong Corndog</li>
+          <li>Singo (musical bingo) 7–10pm</li>
+        </ul>
+      </div>
+      <div class="day-card reveal" data-day="2">
+        <span class="tag">Tuesday</span>
+        <h4>Texas Night</h4>
+        <ul>
+          <li><b>$5</b> Texas Liquor</li>
+          <li><b>$1 off</b> Texas Beer</li>
+          <li><b>$15</b> BOGO Yesterday's Burger</li>
+          <li>Free pool w/ college ID</li>
+        </ul>
+      </div>
+      <div class="day-card reveal" data-day="3">
+        <span class="tag">Wednesday</span>
+        <h4>Karaoke Night</h4>
+        <ul>
+          <li><b>$3</b> Wells</li>
+          <li><b>$3.50</b> Domestic Bottles</li>
+          <li><b>½ off</b> Appetizers</li>
+          <li>Karaoke kicks off 8pm</li>
+        </ul>
+      </div>
+      <div class="day-card reveal" data-day="4">
+        <span class="tag">Thursday</span>
+        <h4>Wing Night</h4>
+        <ul>
+          <li><b>$5</b> Select Liquors</li>
+          <li><b>$5</b> Import Bottles</li>
+          <li><b>$1</b> Wings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section id="menu" class="menu page-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Eat &amp; Drink</div>
+      <h2>The Full Menu</h2>
+      <p>Hand-battered, house-made, and piled high. Sauces run from honey hot to mango habanero — ask for the full lineup.</p>
+    </div>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="food">Food</button>
+      <button class="tab-btn" data-tab="brunch-food">Brunch</button>
+      <button class="tab-btn" data-tab="cocktails">Cocktails</button>
+      <button class="tab-btn" data-tab="beer">Beer</button>
+    </div>
+
+    <!-- FOOD -->
+    <div class="tab-panel active" id="food">
+      <p class="menu-note" style="margin-bottom:1.5rem;">Stopping by for lunch? Ask about our simplified, quick-turn lunch menu — or dig into the full food menu below, available all day.</p>
+      <div class="menu-cat reveal">
+        <h3>Appetizers</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Crispitos<span class="menu-item__desc">A tightly rolled tortilla with diced chicken and cheese</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Fried Mushrooms<span class="menu-item__desc">Hand battered in house with a side of ranch</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Spicy or Regular Cheesesticks<span class="menu-item__desc">Served with ranch or marinara</span></div></div><div class="menu-item__price">$10.50</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Onion Rings</div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Fried Jalapeños<span class="menu-item__desc">Hand battered, served with our homemade chipotle ranch</span></div></div><div class="menu-item__price">$9</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Texas Toothpicks<span class="menu-item__desc">Spicy onion and jalapeño strips served with chipotle ranch</span></div></div><div class="menu-item__price">$9</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">French Fries, Sweet Potato Fries, Tots or Homemade Potato Chips</div></div><div class="menu-item__price">$6.50</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">The Sampler<span class="menu-item__desc">Choose 3 from above</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Cajun Ball Sampler<span class="menu-item__desc">Choose 2: boudin, red beans &amp; rice, crawfish étouffée, or spinach &amp; artichoke, served with chipotle ranch</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Cheese Curds<span class="menu-item__desc">Regular, sriracha, or dill pickle — served with ranch, choose one</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Pork Skins &amp; Queso<span class="menu-item__desc">+ pulled pork, sausage, or chorizo to queso +$3</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Chips &amp; Queso / Guacamole / Salsa</div></div><div class="menu-item__price">$6</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Cheese Fries or Tots<span class="menu-item__desc">+ bacon or jalapeños +$1</span></div></div><div class="menu-item__price">$11</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Footlong Corndog<span class="menu-item__desc">+ a side +$3</span></div></div><div class="menu-item__price">$5</div></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Entrees</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Chicken Strip Basket<span class="menu-item__desc">Served with a dipping choice of your choosing + Texas Toast · +$1 tossed in wing sauce</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Quesadilla<span class="menu-item__desc">Served with pico de gallo &amp; sour cream · +$4 grilled chicken, steak, or pulled pork</span></div></div><div class="menu-item__price">$8</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Wings (10)<span class="menu-item__desc">Buffalo, BBQ, Honey Hot, Sweet Teriyaki, Garlic Parmesan, Sweet Chili, or Mango Habanero · Dry rubs: Lemon Pepper, Jerk, Nashville Hot, or OooWee Ranch · served with ranch or bleu cheese</span></div></div><div class="menu-item__price">$16</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Fried Catfish Basket<span class="menu-item__desc">3 catfish filets served with fries and hushpuppies</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Papa Drewski Nachos<span class="menu-item__desc">Tortilla chips covered with beans, jalapeños, sour cream &amp; queso · +$4 chicken, steak, or pulled pork</span></div></div><div class="menu-item__price">$11</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">One Big Stack of Nachos<span class="menu-item__desc">Tortilla chips covered with beans, jalapeños, sour cream, and shredded cheese · +$4 chicken, steak, or pulled pork</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Frito Pie<span class="menu-item__desc">Served with chili, shredded cheese, &amp; onions</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Texas Taco Basket<span class="menu-item__desc">2 tacos on a flour tortilla with choice of fajita steak or grilled chicken, cheese, and grilled bell peppers + onions, side of chips and salsa</span></div></div><div class="menu-item__price">$12</div></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Burgers</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Yesterday's ½-lb Burger<span class="menu-item__desc">Our famous ½-lb homemade patty, lettuce, tomato, pickle, and onion on a sourdough bun</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Guacamole Burger<span class="menu-item__desc">Grilled onions, guacamole, and pepper jack cheese on a sourdough bun</span></div></div><div class="menu-item__price">$17</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">BBQ Bacon Cheeseburger<span class="menu-item__desc">Bacon, grilled onions, lettuce, tomato, cheddar cheese, and BBQ sauce on a sourdough bun</span></div></div><div class="menu-item__price">$16.50</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">OooWee Burger<span class="menu-item__desc">Buffalo sauce, jalapeños, pepper jack, bacon, lettuce, tomato, pickle, and onion on a sourdough bun</span></div></div><div class="menu-item__price">$17</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Sliders (4)<span class="menu-item__desc">Mini cheeseburgers with onions and mustard</span></div></div><div class="menu-item__price">$15</div></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Sandwiches</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Grilled Cheese<span class="menu-item__desc">With grilled tomatoes and bacon on white or wheat bread</span></div></div><div class="menu-item__price">$9</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">BLT<span class="menu-item__desc">Bacon, lettuce, tomato, and mayo on Texas Toast</span></div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Patty Melt<span class="menu-item__desc">Our patty smothered with grilled onions and Swiss cheese on Texas Toast</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Ham Melt<span class="menu-item__desc">American cheese, honey mustard, and grilled onions on a sourdough bun</span></div></div><div class="menu-item__price">$13</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Turkey Melt<span class="menu-item__desc">BBQ sauce, grilled onions, Swiss cheese, lettuce, and tomato on a sourdough bun</span></div></div><div class="menu-item__price">$13</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">The Club<span class="menu-item__desc">Ham, turkey, bacon, lettuce, tomato, cheese and mayo on Texas Toast</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Club on a Sweet Ass Bun<span class="menu-item__desc">Ham, turkey, bacon, lettuce, tomato, cheese and mayo on a sourdough bun</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Grilled Chicken Sandwich<span class="menu-item__desc">Marinated chicken breast, bacon, Swiss cheese, lettuce and tomato on a sourdough bun</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Fried Chicken Sandwich<span class="menu-item__desc">Hand-breaded, tossed in buffalo sauce, lettuce, tomato, ranch or bleu cheese, on a sourdough bun</span></div></div><div class="menu-item__price">$15</div></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Salads</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Chicken Salad<span class="menu-item__desc">Fried or grilled chicken over lettuce, bacon, tomato, cheese and grilled bell peppers</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Steak Salad<span class="menu-item__desc">Marinated skirt steak over lettuce, bacon, tomato, cheese and grilled bell peppers</span></div></div><div class="menu-item__price">$16</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Cool Wrap<span class="menu-item__desc">Pico de gallo, shredded cheese, lettuce, ranch · with chips &amp; queso · +$4 fried chicken, grilled chicken, or steak</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Club Salad<span class="menu-item__desc">Lettuce, ham, turkey, bacon, tomatoes, and shredded cheese</span></div></div><div class="menu-item__price">$14.50</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Side Salad<span class="menu-item__desc">Lettuce, tomato, and cheese</span></div></div><div class="menu-item__price">$5</div></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Desserts</h3>
+        <p class="menu-note" style="margin-bottom:.8rem;">Served with ice cream and chocolate or caramel sauce.</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Fried Cheesecake Rolls</div></div><div class="menu-item__price">$10.50</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Fried Apple Pie Egg Rolls</div></div><div class="menu-item__price">$10.50</div></div>
+        </div>
+      </div>
+
+      <p class="menu-note">Add-ons &amp; sides: $1 — ranch, bleu cheese, sour cream, gravy, pico, or any wing sauce. $2 — queso, bacon, jalapeños, mushrooms, grilled onions, avocado, guacamole, bell peppers, salsa, or fried egg. Beverages $3.50 (Coke, Diet Coke, Sprite, Dr. Pepper, root beer, lemonade, tea, ginger ale, cranberry, pineapple, OJ · Topo Chico +$2). Check out our late-night menu, served at 10pm until the kitchen closes. Full menu subject to change — call ahead for current pricing.</p>
+    </div>
+
+    <!-- BRUNCH -->
+    <div class="tab-panel" id="brunch-food">
+      <div class="menu-cat reveal">
+        <h3>Weekend Brunch · Sat &amp; Sun 10am–2pm</h3>
+        <p class="menu-note" style="margin-bottom:1rem;">Free pool Sundays until 2pm. Sunday Funday with DJ Rob spinning 1–4pm.</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Hangover Burger<span class="menu-item__desc">½-lb patty topped with an egg and cheese on a sourdough bun, with a side</span></div></div><div class="menu-item__price">$15</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Sandwich<span class="menu-item__desc">Sausage or bacon, egg &amp; cheese on white or wheat toast, with a side</span></div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Hash Smash<span class="menu-item__desc">Egg, meat &amp; cheese layered between two hash browns (sausage, bacon, or chorizo), topped with queso, salsa, or gravy</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Plate<span class="menu-item__desc">2 eggs (fried or scrambled), sausage or bacon, and a side</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Avocado Toast<span class="menu-item__desc">Avocado on toasted wheat bread with tomato · add an egg +$3</span></div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Burrito<span class="menu-item__desc">12" flour tortilla, egg, cheese, choice of potato/sausage/bacon/pulled pork/chorizo, gravy/queso/salsa on top</span></div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Taco Basket<span class="menu-item__desc">2 tacos with egg, cheese, choice of sausage/bacon/chorizo/pulled pork/potato, and a side</span></div></div><div class="menu-item__price">$12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Bowl<span class="menu-item__desc">Egg, cheese, choice of potato, sausage, bacon, pulled pork or chorizo</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Corndog (2)<span class="menu-item__desc">Pancake-wrapped sausage, served with a side of hash browns</span></div></div><div class="menu-item__price">$9</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Pancakes (4)<span class="menu-item__desc">With a choice of side</span></div></div><div class="menu-item__price">$14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Pork Skins and Queso<span class="menu-item__desc">Add chorizo, sausage or pulled pork +$4</span></div></div><div class="menu-item__price">$10</div></div>
+        </div>
+        <div class="brunch__addons">
+          <span><b>Potatoes</b> $4</span><span><b>Toast</b> $3</span><span><b>Egg</b> $3</span>
+          <span><b>Gravy</b> $2</span><span><b>Avocado</b> $2</span><span><b>Bacon (3)</b> $4</span>
+          <span><b>Hash Browns (2)</b> $4</span><span><b>Pancakes (2)</b> $5</span><span><b>Queso</b> $2</span>
+          <span><b>Pico</b> $1</span><span><b>Sausage Patties (2)</b> $4</span><span><b>Chorizo</b> $4</span>
+          <span><b>Salsa</b> $2</span><span><b>Grilled Onions</b> $2</span>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Brunch Bar — Sunday Funday w/ DJ Rob 1–4pm</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Michelada<span class="menu-item__desc">Dos XX, Corona, Modelo, or Pacifico with a choice of mix (Zing Zang or Clamato)</span></div></div><div class="menu-item__price">$6</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Mimosa Pitcher<span class="menu-item__desc">OJ, pineapple, cranberry, grapefruit, or transfusion</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Bloody Mary / Maria<span class="menu-item__desc">Deep Eddy's vodka or 1800 Silver tequila with a choice of mix (Zing Zang or Clamato)</span></div></div><div class="menu-item__price">$6</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Screwdriver<span class="menu-item__desc">Deep Eddy's vodka and OJ</span></div></div><div class="menu-item__price">$7</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Breakfast Shot<span class="menu-item__desc">Paddy's Irish whiskey mixed with Buttershots, orange juice, and a piece of bacon</span></div></div><div class="menu-item__price">$5</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Irish Coffee<span class="menu-item__desc">A shot of Paddy's Irish whiskey with coffee · add Baileys +$4</span></div></div><div class="menu-item__price">$7</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Baileys and Coffee</div></div><div class="menu-item__price">$7</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Espresso Martini<span class="menu-item__desc">Choice of Stoli Vanilla or Deep Eddy's Original mixed with Owen's Espresso</span></div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Sangria Pitcher</div></div><div class="menu-item__price">$10</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Coffee</div></div><div class="menu-item__price">$5</div></div>
+        </div>
+        <p class="menu-note">"The 1 &amp; Only Butchered Bevo Shot" (saw 'em off) — a shot of Paddy's Irish whiskey chilled with an au jus back. $5.</p>
+      </div>
+    </div>
+
+    <!-- COCKTAILS -->
+    <div class="tab-panel" id="cocktails">
+      <div class="menu-cat reveal">
+        <h3>Vodka</h3>
+        <div class="cocktail-grid">
+          <div class="cocktail-card"><h4>Moscow Mule</h4><p>Weber Ranch Vodka, lime juice &amp; ginger beer</p></div>
+          <div class="cocktail-card"><h4>Colorado Bulldog</h4><p>Enchanted Rock Vodka, Kahlúa, cream &amp; a splash of Coke</p></div>
+          <div class="cocktail-card"><h4>White Russian</h4><p>Enchanted Rock Vodka, Kahlúa &amp; cream</p></div>
+          <div class="cocktail-card"><h4>Spicy Pickle Martini</h4><p>Enchanted Rock Vodka, real pickle juice, Tabasco, tajín rim</p></div>
+          <div class="cocktail-card"><h4>Bloody Mary Quite Contrary</h4><p>Weber Ranch Vodka, Zing Zang, Tabasco, Worcestershire, tajín rim, bacon &amp; pepperoncini garnish</p></div>
+          <div class="cocktail-card"><h4>Rodeo Queen Cosmopolitan</h4><p>Weber Ranch, triple sec, lime juice &amp; cranberry</p></div>
+          <div class="cocktail-card"><h4>Espresso Martini</h4><p>Weber Ranch, Kahlúa espresso mix &amp; a dash of simple syrup</p></div>
+        </div>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>Whiskey</h3>
+        <div class="cocktail-grid">
+          <div class="cocktail-card"><h4>Irish Mule</h4><p>Paddy's Irish Whiskey, lime juice &amp; ginger beer</p></div>
+          <div class="cocktail-card"><h4>House Old Fashioned</h4><p>Rebecca Creek, bitters, simple syrup, orange peel</p></div>
+          <div class="cocktail-card"><h4>Coconut-Pecan Old Fashioned</h4><p>Texas Ranger Coconut Pecan, bitters, simple syrup, orange &amp; cherry</p></div>
+          <div class="cocktail-card"><h4>Cinnamon Maple Old Fashioned</h4><p>Mash &amp; Mellow, maple syrup, cinnamon bitters, orange peel</p></div>
+          <div class="cocktail-card"><h4>Carajillo</h4><p>Liqueur 43 with Owen's espresso mix, over ice</p></div>
+          <div class="cocktail-card"><h4>Dark &amp; Stormy</h4><p>Kraken rum, lime juice &amp; ginger beer</p></div>
+          <div class="cocktail-card"><h4>Gimlet</h4><p>Hawthorn's Gin, lime juice, simple syrup</p></div>
+        </div>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>House Specials</h3>
+        <div class="cocktail-grid">
+          <div class="cocktail-card"><h4>Texas Peach</h4><p>Texas Ranger Peach &amp; Tropical Red Bull</p></div>
+          <div class="cocktail-card"><h4>Spicy Pineapple Marg</h4><p>Espolòn, Cointreau, fresh jalapeño &amp; pineapple</p></div>
+          <div class="cocktail-card"><h4>Texas Sunset</h4><p>Deep Eddy Peach, orange &amp; pineapple juice, grenadine</p></div>
+          <div class="cocktail-card"><h4>Dirt Dr. Pepper</h4><p>Buffalo Trace Bourbon Cream with Dr. Pepper</p></div>
+          <div class="cocktail-card"><h4>Marshmallow Espresso Martini</h4><p>Mash &amp; Mellow, Kahlúa &amp; espresso mix</p></div>
+          <div class="cocktail-card"><h4>Snakebite</h4><p>Guinness &amp; Austin Eastcider</p></div>
+          <div class="cocktail-card"><h4>Sangria Margarita</h4><p>Espolòn margarita with sangria floated on top</p></div>
+          <div class="cocktail-card"><h4>Southern Gintleman</h4><p>Hawthorn's Gin with Jack Rudy's tonic syrup and Topo Chico</p></div>
+          <div class="cocktail-card"><h4>Gin Transfusion</h4><p>Hawthorn's Gin topped off with Owen's Transfusion mix</p></div>
+          <div class="cocktail-card"><h4>Orange Crush</h4><p>Enchanted Rock Vodka, Grand Marnier, OJ &amp; sprite or soda</p></div>
+          <div class="cocktail-card"><h4>Black Martini</h4><p>Deep Eddy's, Blue Curaçao, raspberry, &amp; sour</p></div>
+        </div>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>Shots</h3>
+        <p class="menu-note" style="margin-bottom:.8rem;">Ask your bartender for details on each — Baby Beer, Breakfast Shot, Butchered Bevo, Coconut Pecan, Irish Thin Mint, Jack My Apple, Pickle Shot, Redneck Mother, S'Mores Shot, Tropical Vegas Bomb, and Yesterday's Panty Dropper.</p>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>Wine</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Pinot Grigio, Chardonnay, Merlot, or Cabernet<span class="menu-item__desc">By the glass</span></div></div><div class="menu-item__price">$6</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Champagne<span class="menu-item__desc">Glass / Bottle</span></div></div><div class="menu-item__price">$5 / $12</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Mimosa<span class="menu-item__desc">Glass / Bottle</span></div></div><div class="menu-item__price">$6 / $14</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Transfusion Mimosa</div></div><div class="menu-item__price">$6</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Sangria</div></div><div class="menu-item__price">$6</div></div>
+        </div>
+      </div>
+      <p class="menu-note">Full cocktail list available at the bar — ask about seasonal rotations and specials.</p>
+    </div>
+
+    <!-- BEER -->
+    <div class="tab-panel" id="beer">
+      <div class="menu-cat reveal">
+        <h3>Draught</h3>
+        <p class="menu-note" style="margin-bottom:1rem;">Austin Eastcider, Blue Moon, Bud Light, Busch Light, Coors Banquet, Coors Light, Dos XX, Guinness, Hoop Tea, Hopadillo, Kona Big Wave, Fireant, Love Street, Michelob Ultra, Miller Lite, Ziegenbock, Shiner Seasonal, Voodoo Ranger, Yellow Rose, Yuengling</p>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>Bottles</h3>
+        <p class="menu-note" style="margin-bottom:1rem;">Angry Orchard, Bud Light, Budweiser, Busch Light, Coors Light, Corona Extra, Dos XX, Heineken, Miller High Life, High Life Pony, Lonestar, Michelob Ultra, Miller Lite, Nutrl, Modelo, Pacifico, Shiner, Suncruiser, Yuengling Flight</p>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>Buckets</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Busch Light Bucket</div></div><div class="menu-item__price">$16</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Domestic Bucket</div></div><div class="menu-item__price">$22</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Import Bucket</div></div><div class="menu-item__price">$25</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Nutrl Bucket</div></div><div class="menu-item__price">$25</div></div>
+        </div>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>All Day, Everyday Specials</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Busch Light Bucket</div></div><div class="menu-item__price">$16</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Paddy's &amp; Ginger Ale</div></div><div class="menu-item__price">$5</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Ziegenbock</div></div><div class="menu-item__price">$4</div></div>
+          <div class="menu-item"><div><div class="menu-item__name">High Life Ponys</div></div><div class="menu-item__price">$2.50</div></div>
+        </div>
+      </div>
+      <div class="menu-cat reveal">
+        <h3>N/A Beverages</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div><div class="menu-item__name">Heineken 0.0 / Michelob Ultra 0.0</div></div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Sunny Beach<span class="menu-item__desc">Pineapple juice, orange juice, &amp; cranberry</span></div></div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Shirley Temple<span class="menu-item__desc">Sprite &amp; grenadine</span></div></div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Roy Rogers<span class="menu-item__desc">Coke &amp; grenadine</span></div></div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Blushing Arnold Palmer<span class="menu-item__desc">Lemonade, tea, &amp; grenadine</span></div></div></div>
+          <div class="menu-item"><div><div class="menu-item__name">Red Bull<span class="menu-item__desc">Original, Sugar-Free, Blueberry, Tropical, or Coconut Berry</span></div></div></div>
+        </div>
+        <p class="menu-note">Also available: Ginger Ale, Ginger Beer, Root Beer, Squirt, Fresca, Topo Chico, Sweet Tea, Unsweet Tea.</p>
+      </div>
+      <p class="menu-note">Kitchen hours: Sun–Thu open–12am, Fri &amp; Sat open–1am. Drinking hours: Mon–Fri 11am–2am, Sat–Sun 10am–2am. Free pool w/ college ID every Tuesday, and Sundays until 2pm!</p>
+    </div>
+
+    <div class="download-row reveal">
+      <a class="download-chip" href="https://img1.wsimg.com/blobby/go/ddb56216-83db-4108-bee1-dd2efe0a9e7f/downloads/2b332068-178b-490f-8208-335021e53a0c/Yesterday_s%20Food%20Menu%20FINAL%20COPY%20(1).pdf" target="_blank" rel="noopener">↓ Official Food Menu (PDF)</a>
+      <a class="download-chip" href="https://img1.wsimg.com/blobby/go/ddb56216-83db-4108-bee1-dd2efe0a9e7f/downloads/51c81fd4-626b-4a9f-8d72-8fdd88511160/Cocktails%20(4%20x%2011%20in)%20(2).pdf" target="_blank" rel="noopener">↓ Official Cocktail Menu (PDF)</a>
+      <a class="download-chip" href="https://img1.wsimg.com/blobby/go/ddb56216-83db-4108-bee1-dd2efe0a9e7f/downloads/abcc64fa-23d0-4e45-b921-b6680aa40ccb/Brunch%20Menu%202025.pdf" target="_blank" rel="noopener">↓ Official Brunch Menu (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAMES ============ -->
+<section id="games" class="games page-section">
+  <div class="container">
+    <div class="photo-banner reveal" style="margin-bottom:2.5rem;">
+      <img src="https://img1.wsimg.com/isteam/ip/ddb56216-83db-4108-bee1-dd2efe0a9e7f/IMG_0143.JPG/:/cr=t:12.5%25,l:0%25,w:100%25,h:75%25/rs=w:1400,h:613,cg:true" alt="Pool table racked and ready at Yesterday's Bar & Grill" loading="lazy">
+    </div>
+    <div class="section-head reveal">
+      <div class="eyebrow">Get In The Game</div>
+      <h2>Pool. Darts. Shuffleboard.</h2>
+      <p>No app, no reservation, no league night required — just show up, rack 'em, and talk trash.</p>
+    </div>
+    <div class="games__grid">
+      <div class="game-card reveal">
+        <div class="game-card__photo"><img src="assets/gallery/gallery-60.jpeg" alt="Pool hall with multiple tables at Yesterday's Bar & Grill" loading="lazy"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="var(--amber)" stroke="none"/></svg>
+        <h4>Pool</h4>
+        <p class="game-card__tagline">Table's always open — the only question is who racks.</p>
+        <ul>
+          <li>Free Sundays until 2pm</li>
+          <li>Free Tuesdays with college ID</li>
+          <li>$10/hour otherwise</li>
+        </ul>
+      </div>
+      <div class="game-card reveal">
+        <div class="game-card__photo"><img src="assets/gallery/gallery-58.jpeg" alt="Row of dartboards at Yesterday's Bar & Grill" loading="lazy"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="var(--amber)" stroke="none"/></svg>
+        <h4>Darts</h4>
+        <p class="game-card__tagline">Four steel-tip boards. Zero excuses for missing bullseye.</p>
+        <ul>
+          <li>4 steel-tip boards, all indoors</li>
+          <li>Bring your crew, call your shots</li>
+        </ul>
+      </div>
+      <div class="game-card reveal">
+        <div class="game-card__photo"><img src="assets/gallery/gallery-59.jpeg" alt="Shuffleboard table at Yesterday's Bar & Grill" loading="lazy"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="4" rx="1"/><circle cx="19" cy="12" r="1.4" fill="var(--amber)" stroke="none"/></svg>
+        <h4>Shuffleboard</h4>
+        <p class="game-card__tagline">The unofficial pre-game before karaoke gets loud.</p>
+        <ul>
+          <li>Classic table, always open</li>
+          <li>Great warm-up before karaoke</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<!-- ============ GALLERY ============ -->
+<section id="gallery" class="gallery page-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">A Look Around</div>
+      <h2>Photo Gallery</h2>
+      <p>The patio, the bar, and everything in between.</p>
+    </div>
+    <div class="gallery__grid reveal" id="galleryGrid"></div>
+    <p class="menu-note" style="text-align:center; margin-top:1rem;">More photos coming soon — follow along on <a href="https://www.facebook.com/pages/Yesterdays-Bar-Grill/136270043220222" target="_blank" rel="noopener" style="color:var(--rust); font-weight:600;">Facebook</a> and <a href="https://www.instagram.com/yesterdays_bar" target="_blank" rel="noopener" style="color:var(--rust); font-weight:600;">Instagram</a> for the latest.</p>
+  </div>
+  <div class="gallery__lightbox" id="galleryLightbox">
+    <button class="gallery__lightbox-close" id="galleryLightboxClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <button class="gallery__lightbox-arrow gallery__lightbox-arrow--prev" id="galleryLightboxPrev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <img id="galleryLightboxImg" src="" alt="">
+    <button class="gallery__lightbox-arrow gallery__lightbox-arrow--next" id="galleryLightboxNext" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="gallery__lightbox-counter" id="galleryLightboxCounter"></div>
+  </div>
+</section>
+
+<section id="visit" class="visit page-section">
+  <div class="container visit__grid">
+    <div class="reveal">
+      <div class="eyebrow">Find Us</div>
+      <h2>Come See Us</h2>
+
+      <div class="info-list">
+        <div class="info-row">
+          <div class="info-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Address</h4><p>4421 South Texas Avenue<br>Bryan, Texas 77802</p></div>
+        </div>
+        <div class="info-row">
+          <div class="info-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h4>Phone</h4><p><a href="tel:19798462625">(979) 846-2625</a></p></div>
+        </div>
+        <div class="info-row">
+          <div class="info-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+          <div><h4>Email</h4><p><a href="mailto:yesterdaysbar1979@gmail.com">yesterdaysbar1979@gmail.com</a></p></div>
+        </div>
+      </div>
+
+      <div class="hours-card">
+        <h4>Hours</h4>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>11am – 2am</td></tr>
+          <tr><td>Tuesday</td><td>11am – 2am</td></tr>
+          <tr><td>Wednesday</td><td>11am – 2am</td></tr>
+          <tr><td>Thursday</td><td>11am – 2am</td></tr>
+          <tr><td>Friday</td><td>11am – 2am</td></tr>
+          <tr><td>Saturday</td><td>10am – 2am</td></tr>
+          <tr><td>Sunday</td><td>10am – 2am</td></tr>
+          <tr><td>Brunch · Sat &amp; Sun</td><td>10am – 2pm</td></tr>
+        </table>
+      </div>
+
+      <div class="social-row">
+        <a class="social-btn" href="https://www.facebook.com/pages/Yesterdays-Bar-Grill/136270043220222" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/yesterdays_bar" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.tiktok.com/@yesterdays_barandgrill" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c0 3 2.2 5 5 5"/></svg>
+        </a>
+      </div>
+
+      <h4 style="font-family:'Work Sans',sans-serif; font-weight:600; margin:2rem 0 .8rem;">Find Us Elsewhere</h4>
+      <div class="ref-row">
+        <a class="ref-chip" href="https://www.google.com/maps/search/?api=1&query=Yesterday%27s+Bar+%26+Grill+4421+South+Texas+Avenue+Bryan+TX+77802" target="_blank" rel="noopener"><b>4.3★</b> Google (590)</a>
+        <a class="ref-chip" href="https://www.yelp.com/biz/yesterdays-bar-and-grill-bryan" target="_blank" rel="noopener"><b>3.3★</b> Yelp (55)</a>
+        <a class="ref-chip" href="https://www.tripadvisor.com/Restaurant_Review-g55543-d4681113-Reviews-Yesterday_s-Bryan_Texas.html" target="_blank" rel="noopener">TripAdvisor</a>
+        <a class="ref-chip" href="https://www.destinationbryan.com/directory/yesterdays-bar-grill/" target="_blank" rel="noopener">Destination Bryan</a>
+      </div>
+    </div>
+
+    <div class="visit__map reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=4421%20South%20Texas%20Avenue%2C%20Bryan%2C%20TX%2077802&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        title="Map to Yesterday's Bar & Grill, 4421 South Texas Avenue, Bryan, Texas"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container footer__grid">
+    <div class="footer__logo">
+      <img src="assets/logo.png" alt="Yesterday's Bar & Grill logo">
+      Yesterday's
+    </div>
+    <div class="footer__links">
+      <a href="#home">Home</a>
+      <a href="#menu" data-tab="menu">Menu</a>
+      <a href="#visit" data-tab="visit">Visit</a>
+      <a href="https://yesterdays1979.com/" target="_blank" rel="noopener">Official Site</a>
+      <a href="assets/hiring-flyer.png" target="_blank" rel="noopener">We're Hiring</a>
+    </div>
+    <div class="footer__social">
+      <a href="https://www.facebook.com/pages/Yesterdays-Bar-Grill/136270043220222" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/yesterdays_bar" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@yesterdays_barandgrill" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c0 3 2.2 5 5 5"/></svg>
+      </a>
+    </div>
+    <div class="footer__note">&copy; <span id="year"></span> Yesterday's Bar &amp; Grill · Bryan, TX · A Fine Entertainment Establishment · Photos courtesy of <a href="https://yesterdays1979.com/" target="_blank" rel="noopener" style="color:var(--amber-soft);">Yesterday's</a></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
