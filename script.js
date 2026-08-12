@@ -1,35 +1,3 @@
-// ============ LIVE FACEBOOK EMBED (optional) ============
-// Facebook's Page Plugin refuses to render without a registered Facebook App ID —
-// it returns "Error: Unowned Facebook Pages are not supported" instead of a feed.
-// Getting an App ID takes ~2 minutes at developers.facebook.com/apps, needs only a
-// Facebook login (NOT page-admin rights), and is free. Paste it below and reload —
-// no other code changes needed, the live timeline will appear inside the Follow Us
-// card automatically. Leave blank to keep today's static "This Week" card as-is.
-const FB_APP_ID = '';
-
-if (FB_APP_ID) {
-  const fbRoot = document.createElement('div');
-  fbRoot.id = 'fb-root';
-  document.body.prepend(fbRoot);
-
-  const sdkScript = document.createElement('script');
-  sdkScript.async = true;
-  sdkScript.defer = true;
-  sdkScript.crossOrigin = 'anonymous';
-  sdkScript.src = `https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0&appId=${FB_APP_ID}`;
-  document.body.appendChild(sdkScript);
-
-  const mount = document.getElementById('fbLiveEmbed');
-  if (mount) {
-    mount.style.display = 'block';
-    mount.innerHTML = `<div class="fb-page"
-      data-href="https://www.facebook.com/pages/Yesterdays-Bar-Grill/136270043220222"
-      data-tabs="timeline" data-width="500" data-height="600"
-      data-small-header="true" data-adapt-container-width="true"
-      data-hide-cover="false" data-show-facepile="false"></div>`;
-  }
-}
-
 // ============ NAV SCROLL STATE ============
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -45,9 +13,18 @@ function activateTab(tabId, scrollUp) {
   if (!validTabs.includes(tabId)) return;
   pageSections.forEach(s => s.classList.toggle('active', s.id === tabId));
   tabLinks.forEach(a => a.classList.toggle('active', a.dataset.tab === tabId));
+  if (tabId === 'menu') resetMenuSubtabs();
   if (scrollUp) {
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
+}
+
+function resetMenuSubtabs() {
+  const foodBtn = document.querySelector('.tab-btn[data-tab="food"]');
+  const foodPanel = document.getElementById('food');
+  if (!foodBtn || !foodPanel) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === foodBtn));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p === foodPanel));
 }
 
 const heroEl = document.getElementById('home');
@@ -57,21 +34,46 @@ tabLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const tabId = link.dataset.tab;
-    activateTab(tabId, true);
+    activateTab(tabId, !link.dataset.anchor);
     history.replaceState(null, '', '#' + tabId);
     heroEl.classList.add('hero--compact');
     if (link.dataset.anchor) {
-      requestAnimationFrame(() => {
+      const doScroll = () => {
         const target = document.getElementById(link.dataset.anchor);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      };
+      let scrolled = false;
+      const scrollAfterSettle = () => {
+        if (scrolled) return;
+        scrolled = true;
+        setTimeout(doScroll, 150);
+      };
+      const onTransitionEnd = (ev) => {
+        if (ev.target !== heroEl) return;
+        heroEl.removeEventListener('transitionend', onTransitionEnd);
+        scrollAfterSettle();
+      };
+      heroEl.addEventListener('transitionend', onTransitionEnd);
+      // fallback in case transitionend doesn't fire (e.g. hero already compact, no transition triggered)
+      setTimeout(() => {
+        heroEl.removeEventListener('transitionend', onTransitionEnd);
+        scrollAfterSettle();
+      }, 600);
     }
   });
 });
 
 if (homeLogoLink) {
-  homeLogoLink.addEventListener('click', () => {
+  homeLogoLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    activateTab('about', true);
+    history.replaceState(null, '', '#home');
     heroEl.classList.remove('hero--compact');
+    resetMenuSubtabs();
+    const lb = document.getElementById('galleryLightbox');
+    if (lb) lb.classList.remove('open');
+    const mm = document.getElementById('mobileMenu');
+    if (mm) mm.classList.remove('open');
   });
 }
 
@@ -81,6 +83,13 @@ activateTab(initialTab, false);
 // ============ GALLERY SLIDESHOW ============
 const galleryPhotos = [
   { src: 'assets/gallery/gallery-60.jpeg', alt: 'Pool hall with multiple tables at Yesterday\'s Bar & Grill' },
+  { src: 'assets/gallery/gallery-62.png', alt: 'Yesterday\'s staff smiling with liquor bottles on the patio' },
+  { src: 'assets/gallery/gallery-63.jpg', alt: 'Queen of Hearts Raffle flyer, every Sunday 1-4pm' },
+  { src: 'assets/gallery/gallery-64.jpg', alt: 'Youth basketball team photo on the patio' },
+  { src: 'assets/gallery/gallery-66.jpg', alt: 'Queen of Hearts Raffle drawing on the patio' },
+  { src: 'assets/gallery/gallery-67.jpg', alt: 'Guest holding a raffle card at the Queen of Hearts drawing' },
+  { src: 'assets/gallery/gallery-65.jpg', alt: 'Eley Buck Davis live music flyer at Yesterday\'s Bar & Grill' },
+  { src: 'assets/gallery/gallery-70.jpg', alt: 'Chris Helms live music flyer at Yesterday\'s Bar & Grill' },
   { src: 'assets/gallery/gallery-14.png', alt: 'Karbach Brewing sign with weekly specials' },
   { src: 'assets/gallery/gallery-41.png', alt: 'Vendor booth with hats and shirts at an outdoor event' },
   { src: 'assets/gallery/gallery-27.png', alt: 'Crawfish boil with corn and potatoes' },
@@ -199,6 +208,21 @@ document.addEventListener('keydown', (e) => {
 // ============ MOBILE MENU ============
 const burgerBtn = document.getElementById('burgerBtn');
 const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+// ============ DIRECTIONS DROPDOWN ============
+const directionsBtn = document.getElementById('directionsBtn');
+const directionsPanel = document.getElementById('directionsPanel');
+if (directionsBtn && directionsPanel) {
+  directionsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    directionsPanel.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!directionsPanel.contains(e.target) && e.target !== directionsBtn) {
+      directionsPanel.classList.remove('open');
+    }
+  });
+}
 const mobileMenu = document.getElementById('mobileMenu');
 
 burgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
@@ -242,11 +266,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // ============ TODAY'S DEALS POPUP ============
 const dailyDeals = {
-  0: { title: "Sunday Funday", items: ['<b>$10</b> Mimosa Pitcher', '<b>$4.50</b> House Bloody Mary', '<b>$1</b> Hotdogs', 'Free pool til 2pm · DJ Rob 1–4pm'] },
+  0: { title: "Sunday Funday", items: ['<b>$10</b> Mimosa Pitcher', '<b>$3</b> Margaritas', '<b>$4.50</b> Bloody Mary', '<b>$1</b> Hotdogs', 'Free pool til 2pm · DJ Rob starts 2pm', 'Queen of Hearts Raffle 1–4pm · drawing at 4pm'] },
   1: { title: "Singo Night", items: ['<b>$4</b> Domestic Drafts + Freezer Shots', '<b>$2</b> Footlong Corndog', 'Singo (musical bingo) 7–10pm'] },
   2: { title: "Texas Night", items: ['<b>$5</b> Texas Liquor', '<b>$1 off</b> Texas Beer', '<b>$15</b> BOGO Yesterday\'s Burger', 'Free pool w/ college ID'] },
   3: { title: "Karaoke Night", items: ['<b>$3</b> Wells', '<b>$3.50</b> Domestic Bottles', '<b>½ off</b> Appetizers', 'Karaoke kicks off 8pm'] },
-  4: { title: "Wing Night", items: ['<b>$5</b> Select Liquors', '<b>$5</b> Import Bottles', '<b>$1</b> Wings'] },
+  4: { title: "Dollar Wing Day", items: ['<b>$5</b> Select Liquors', '<b>$5</b> Import Bottles', '<b>$1</b> Wings'] },
   5: { title: "Live Music Friday", items: ['Live band 8–11pm', 'Full food & cocktail menu all night', 'Patio seating, first come first served'] },
   6: { title: "Saturday on the Patio", items: ['Full food & cocktail menu', 'Pool, darts & shuffleboard all day', 'Brunch bar back tomorrow 10am–2pm'] }
 };
@@ -262,6 +286,7 @@ function initDealsPopup() {
   const listEl = document.getElementById('dealsPopupList');
   const closeBtn = document.getElementById('dealsPopupClose');
   const linkEl = document.getElementById('dealsPopupLink');
+  const tourneyBtn = document.querySelector('.deals-popup__tourney-btn');
   const fabEl = document.getElementById('dealsFab');
   if (!popupEl) return;
 
@@ -285,6 +310,7 @@ function initDealsPopup() {
 
   closeBtn.addEventListener('click', closePopup);
   linkEl.addEventListener('click', closePopup);
+  if (tourneyBtn) tourneyBtn.addEventListener('click', closePopup);
   fabEl.addEventListener('click', openPopup);
 
   let alreadySeenToday = false;
@@ -305,3 +331,153 @@ function initDealsPopup() {
 }
 initDealsPopup();
 
+
+// ============ CALENDAR MODAL ============
+const calendarDayOfWeekInfo = {
+  0: { title: 'Sunday Funday & Queen of Hearts', text: "$10 Mimosa Pitcher, $3 Margaritas, $4.50 Bloody Mary, free pool til 2pm, DJ Rob starts 2pm, and the Queen of Hearts Raffle 1–4pm (drawing at 4pm)." },
+  1: { title: 'Singo Night', text: 'Bingo with a musical twist, 7–10pm. $4 domestic drafts, $4 Fireball/Jäger/Skrewball/Texas Ranger, $2 footlong corndogs.' },
+  3: { title: 'Karaoke Night', text: '$3 wells, $3.50 domestic bottles, and half off appetizers all night long.' },
+  5: { title: 'Live Music Fridays', text: 'Live music 8–11pm on the patio, plus the full food & cocktail menu all night.' }
+};
+// special one-off event dates: key is "YYYY-M-D" (month is 0-indexed)
+const calendarSpecialEvents = {
+  '2026-7-22': { title: 'Pool & Dart Tournament', text: "Hosted by Aggieland Ducks Unlimited. Check-in 4:00pm, start 5:30pm. Pool $20 early / $25 after Aug 21st. Darts $10 early / $15 after Aug 21st. Cash prizes and merch." }
+};
+
+function renderCalendar() {
+  const gridEl = document.getElementById('calendarGrid');
+  const labelEl = document.getElementById('calendarMonthLabel');
+  const detailEl = document.getElementById('calendarDetail');
+  if (!gridEl || !labelEl) return;
+  if (detailEl) { detailEl.classList.remove('show'); detailEl.innerHTML = ''; }
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  labelEl.textContent = `${monthNames[month]} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = '';
+  ['S','M','T','W','T','F','S'].forEach(d => {
+    html += `<div class="calendar-grid__dow">${d}</div>`;
+  });
+  for (let i = 0; i < firstDay; i++) {
+    html += `<div class="calendar-grid__day calendar-grid__day--empty"></div>`;
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dow = new Date(year, month, day).getDay();
+    const isToday = day === today.getDate();
+    const key = `${year}-${month}-${day}`;
+    const hasEvent = calendarDayOfWeekInfo[dow] || calendarSpecialEvents[key];
+    let dots = '';
+    if (dow === 0) dots += '<span class="calendar-dot calendar-dot--sun"></span>';
+    if (dow === 1) dots += '<span class="calendar-dot calendar-dot--mon"></span>';
+    if (dow === 3) dots += '<span class="calendar-dot calendar-dot--wed"></span>';
+    if (dow === 5) dots += '<span class="calendar-dot calendar-dot--fri"></span>';
+    if (calendarSpecialEvents[key]) dots += '<span class="calendar-dot calendar-dot--event"></span>';
+    html += `<div class="calendar-grid__day${isToday ? ' calendar-grid__day--today' : ''}${hasEvent ? ' calendar-grid__day--has-event' : ''}" data-key="${key}" data-dow="${dow}">
+      <span>${day}</span>
+      <div class="calendar-grid__dots">${dots}</div>
+    </div>`;
+  }
+  gridEl.innerHTML = html;
+
+  gridEl.querySelectorAll('.calendar-grid__day--has-event').forEach(dayEl => {
+    dayEl.addEventListener('click', () => {
+      gridEl.querySelectorAll('.calendar-grid__day--selected').forEach(el => el.classList.remove('calendar-grid__day--selected'));
+      dayEl.classList.add('calendar-grid__day--selected');
+      const key = dayEl.dataset.key;
+      const dow = Number(dayEl.dataset.dow);
+      // prefer the specific one-off event over the recurring day-of-week info
+      const info = calendarSpecialEvents[key] || calendarDayOfWeekInfo[dow];
+      if (!info || !detailEl) return;
+      const dayNum = dayEl.querySelector('span').textContent;
+      detailEl.innerHTML = `
+        <div class="calendar-detail__date">${monthNames[month]} ${dayNum}</div>
+        <div class="calendar-detail__title">${info.title}</div>
+        <div class="calendar-detail__text">${info.text}</div>
+      `;
+      detailEl.classList.add('show');
+    });
+  });
+}
+
+
+const calendarStatBtn = document.getElementById('calendarStatBtn');
+const calendarModal = document.getElementById('calendarModal');
+const calendarModalClose = document.getElementById('calendarModalClose');
+
+if (calendarStatBtn && calendarModal) {
+  calendarStatBtn.addEventListener('click', () => {
+    renderCalendar();
+    calendarModal.classList.add('open');
+  });
+}
+if (calendarModalClose) {
+  calendarModalClose.addEventListener('click', () => calendarModal.classList.remove('open'));
+}
+if (calendarModal) {
+  calendarModal.addEventListener('click', (e) => { if (e.target === calendarModal) calendarModal.classList.remove('open'); });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && calendarModal && calendarModal.classList.contains('open')) {
+    calendarModal.classList.remove('open');
+  }
+});
+
+// ============ ABOUT PAGE PHOTO ROTATION (changes weekly) ============
+const aboutPhotoRotation = [
+  { src: 'assets/gallery/gallery-62.png', alt: "Yesterday's staff smiling with liquor bottles on the patio" },
+  { src: 'assets/gallery/gallery-54.png', alt: 'Friends in Texas A&M jerseys sitting outside' },
+  { src: 'assets/gallery/gallery-56.png', alt: 'Two friends holding Miller High Life bottles' },
+  { src: 'assets/gallery/gallery-06.png', alt: 'Guests smiling on the patio' },
+  { src: 'assets/gallery/gallery-19.png', alt: 'Group of friends walking through the patio' },
+  { src: 'assets/gallery/gallery-55.png', alt: 'Friends at the bar holding bottles' },
+  { src: 'assets/gallery/gallery-35.png', alt: 'Two friends toasting with red cans on the patio' },
+  { src: 'assets/gallery/gallery-31.png', alt: 'Two friends smiling under a tree' }
+];
+function initAboutPhotoRotation() {
+  const imgEl = document.getElementById('aboutMainPhoto');
+  if (!imgEl) return;
+  // rolling week counter since the Unix epoch — increments every 7 days, same for everyone
+  const weekNumber = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+  const choice = aboutPhotoRotation[weekNumber % aboutPhotoRotation.length];
+  imgEl.src = choice.src;
+  imgEl.alt = choice.alt;
+}
+initAboutPhotoRotation();
+
+// ============ IMAGE FLYER LIGHTBOX (reusable) ============
+const hiringFlyerBtn = document.getElementById('hiringFlyerBtn');
+const hiringFlyerLightbox = document.getElementById('hiringFlyerLightbox');
+const hiringFlyerClose = document.getElementById('hiringFlyerClose');
+const flyerLightboxImg = document.getElementById('flyerLightboxImg');
+
+function openFlyerLightbox(src, alt) {
+  if (!hiringFlyerLightbox || !flyerLightboxImg) return;
+  flyerLightboxImg.src = src;
+  flyerLightboxImg.alt = alt;
+  hiringFlyerLightbox.classList.add('open');
+}
+
+if (hiringFlyerBtn) {
+  hiringFlyerBtn.addEventListener('click', () => {
+    openFlyerLightbox('assets/hiring-flyer.png', "Now Hiring — All Positions at Yesterday's Bar & Grill, apply in person");
+  });
+}
+if (hiringFlyerClose) {
+  hiringFlyerClose.addEventListener('click', () => hiringFlyerLightbox.classList.remove('open'));
+}
+if (hiringFlyerLightbox) {
+  hiringFlyerLightbox.addEventListener('click', (e) => {
+    if (e.target === hiringFlyerLightbox) hiringFlyerLightbox.classList.remove('open');
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && hiringFlyerLightbox && hiringFlyerLightbox.classList.contains('open')) {
+    hiringFlyerLightbox.classList.remove('open');
+  }
+});
