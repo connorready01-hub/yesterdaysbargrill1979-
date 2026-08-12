@@ -82,14 +82,14 @@ activateTab(initialTab, false);
 
 // ============ GALLERY SLIDESHOW ============
 const galleryPhotos = [
-  { src: 'assets/gallery/gallery-60.jpeg', alt: 'Pool hall with multiple tables at Yesterday\'s Bar & Grill' },
-  { src: 'assets/gallery/gallery-62.png', alt: 'Yesterday\'s staff smiling with liquor bottles on the patio' },
+  { src: 'assets/gallery/gallery-60.jpeg', alt: 'Pool hall with multiple tables at Yesterdays Bar & Grill' },
+  { src: 'assets/gallery/gallery-62.png', alt: 'Yesterdays staff smiling with liquor bottles on the patio' },
   { src: 'assets/gallery/gallery-63.jpg', alt: 'Queen of Hearts Raffle flyer, every Sunday 1-4pm' },
   { src: 'assets/gallery/gallery-64.jpg', alt: 'Youth basketball team photo on the patio' },
   { src: 'assets/gallery/gallery-66.jpg', alt: 'Queen of Hearts Raffle drawing on the patio' },
   { src: 'assets/gallery/gallery-67.jpg', alt: 'Guest holding a raffle card at the Queen of Hearts drawing' },
-  { src: 'assets/gallery/gallery-65.jpg', alt: 'Eley Buck Davis live music flyer at Yesterday\'s Bar & Grill' },
-  { src: 'assets/gallery/gallery-70.jpg', alt: 'Chris Helms live music flyer at Yesterday\'s Bar & Grill' },
+  { src: 'assets/gallery/gallery-65.jpg', alt: 'Eley Buck Davis live music flyer at Yesterdays Bar & Grill' },
+  { src: 'assets/gallery/gallery-70.jpg', alt: 'Chris Helms live music flyer at Yesterdays Bar & Grill' },
   { src: 'assets/gallery/gallery-14.png', alt: 'Karbach Brewing sign with weekly specials' },
   { src: 'assets/gallery/gallery-41.png', alt: 'Vendor booth with hats and shirts at an outdoor event' },
   { src: 'assets/gallery/gallery-27.png', alt: 'Crawfish boil with corn and potatoes' },
@@ -117,7 +117,7 @@ const galleryPhotos = [
   { src: 'assets/gallery/gallery-28.png', alt: 'Two cans toasting on the patio' },
   { src: 'assets/gallery/gallery-17.png', alt: 'Live band performing on the covered patio' },
   { src: 'assets/gallery/gallery-13.png', alt: 'Guests watching a game on the TVs' },
-  { src: 'assets/gallery/gallery-01.png', alt: 'Bartender pouring a drink at Yesterday\'s Bar & Grill' },
+  { src: 'assets/gallery/gallery-01.png', alt: 'Bartender pouring a drink at Yesterdays Bar & Grill' },
   { src: 'assets/gallery/gallery-47.png', alt: 'Spicy cocktail with hot sauce bottles' },
   { src: 'assets/gallery/gallery-34.png', alt: 'Assorted cocktails lined up on the patio table' },
   { src: 'assets/gallery/gallery-21.png', alt: 'Bacon cheeseburger with tater tots' },
@@ -146,8 +146,8 @@ const galleryPhotos = [
   { src: 'assets/gallery/gallery-55.png', alt: 'Friends at the bar holding bottles' },
   { src: 'assets/gallery/gallery-56.png', alt: 'Two friends holding Miller High Life bottles' },
   { src: 'assets/gallery/gallery-57.png', alt: 'Group photo on the patio celebrating St. Patrick\'s Day' },
-  { src: 'assets/gallery/gallery-58.jpeg', alt: 'Row of dartboards and scoreboards at Yesterday\'s Bar & Grill' },
-  { src: 'assets/gallery/gallery-59.jpeg', alt: 'Shuffleboard table at Yesterday\'s Bar & Grill' }
+  { src: 'assets/gallery/gallery-58.jpeg', alt: 'Row of dartboards and scoreboards at Yesterdays Bar & Grill' },
+  { src: 'assets/gallery/gallery-59.jpeg', alt: 'Shuffleboard table at Yesterdays Bar & Grill' }
 ];
 let galleryIndex = 0;
 const galleryGridEl = document.getElementById('galleryGrid');
@@ -268,7 +268,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const dailyDeals = {
   0: { title: "Sunday Funday", items: ['<b>$10</b> Mimosa Pitcher', '<b>$3</b> Margaritas', '<b>$4.50</b> Bloody Mary', '<b>$1</b> Hotdogs', 'Free pool til 2pm · DJ Rob starts 2pm', 'Queen of Hearts Raffle 1–4pm · drawing at 4pm'] },
   1: { title: "Singo Night", items: ['<b>$4</b> Domestic Drafts + Freezer Shots', '<b>$2</b> Footlong Corndog', 'Singo (musical bingo) 7–10pm'] },
-  2: { title: "Texas Night", items: ['<b>$5</b> Texas Liquor', '<b>$1 off</b> Texas Beer', '<b>$15</b> BOGO Yesterday\'s Burger', 'Free pool w/ college ID'] },
+  2: { title: "Texas Night", items: ['<b>$5</b> Texas Liquor', '<b>$1 off</b> Texas Beer', '<b>$15</b> BOGO Yesterdays Burger', 'Free pool w/ college ID'] },
   3: { title: "Karaoke Night", items: ['<b>$3</b> Wells', '<b>$3.50</b> Domestic Bottles', '<b>½ off</b> Appetizers', 'Karaoke kicks off 8pm'] },
   4: { title: "Dollar Wing Day", items: ['<b>$5</b> Select Liquors', '<b>$5</b> Import Bottles', '<b>$1</b> Wings'] },
   5: { title: "Live Music Friday", items: ['Live band 8–11pm', 'Full food & cocktail menu all night', 'Patio seating, first come first served'] },
@@ -430,7 +430,7 @@ document.addEventListener('keydown', (e) => {
 
 // ============ ABOUT PAGE PHOTO ROTATION (changes weekly) ============
 const aboutPhotoRotation = [
-  { src: 'assets/gallery/gallery-62.png', alt: "Yesterday's staff smiling with liquor bottles on the patio" },
+  { src: 'assets/gallery/gallery-62.png', alt: "Yesterdays staff smiling with liquor bottles on the patio" },
   { src: 'assets/gallery/gallery-54.png', alt: 'Friends in Texas A&M jerseys sitting outside' },
   { src: 'assets/gallery/gallery-56.png', alt: 'Two friends holding Miller High Life bottles' },
   { src: 'assets/gallery/gallery-06.png', alt: 'Guests smiling on the patio' },
@@ -465,7 +465,7 @@ function openFlyerLightbox(src, alt) {
 
 if (hiringFlyerBtn) {
   hiringFlyerBtn.addEventListener('click', () => {
-    openFlyerLightbox('assets/hiring-flyer.png', "Now Hiring — All Positions at Yesterday's Bar & Grill, apply in person");
+    openFlyerLightbox('assets/hiring-flyer.png', "Now Hiring — All Positions at Yesterdays Bar & Grill, apply in person");
   });
 }
 if (hiringFlyerClose) {
