@@ -184,6 +184,7 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
 }
 .nav__logo span{
   font-family:'Rye', serif; font-size:1.15rem; color:var(--rust); letter-spacing:.02em;
+  white-space:nowrap;
 }
 .nav__links{ display:flex; gap:1.8rem; align-items:center; }
 .nav__links a{
@@ -210,13 +211,13 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
 }
 .nav__cta{ display:flex; align-items:center; gap:1rem; }
 .nav__burger{
-  display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:.4rem;
+  display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:.9rem .7rem;
 }
 .nav__burger span{ width:24px; height:2px; background:var(--ink); }
 
 .mobile-menu{
   position:fixed; inset:0; z-index:600;
-  background:rgba(247,240,226,.99);
+  background:rgb(247,240,226);
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
   transform:translateY(-100%);
   transition:transform .4s ease;
@@ -233,7 +234,7 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center;
   position:relative;
-  padding-top:6rem;
+  padding-top:6rem; padding-left:1.5rem; padding-right:1.5rem;
   background:var(--bg);
   overflow:hidden;
   transition:min-height .4s ease, padding .4s ease;
@@ -263,7 +264,7 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
    to <header>, which switches on the darker banner treatment below. */
 .hero__bg-photo{ position:absolute; inset:0; z-index:0; overflow:hidden; opacity:0; transition:opacity .6s ease; }
 .hero__bg-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:41% center; }
-.hero__bg-photo--compact{ object-position:center center; }
+.hero__bg-photo--compact{ object-position:58% 45%; }
 .hero__bg-photo::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, rgba(20,12,8,.68) 0%, rgba(24,15,10,.78) 45%, rgba(30,18,12,.82) 75%, var(--bg) 96%);
@@ -1121,4 +1122,21 @@ footer{ background:var(--rust-deep); border-top:1px solid var(--line); padding:2
 }
 @media (max-width:640px){
   .everyday-box__grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* ============================================================
+   MOBILE HERO — condensed, easy to reach navigation fast
+   ============================================================ */
+@media (max-width:480px){
+  .hero{ padding-top:4.5rem; padding-left:1.2rem; padding-right:1.2rem; }
+  .hero__logo-badge{ width:76px; margin-bottom:.8rem; }
+  .hero__kicker{ font-size:.72rem; letter-spacing:.1em; margin-bottom:.4rem; }
+  .hero__wordmark{ font-size:clamp(1.8rem, 10vw, 2.3rem); }
+  .hero__tagline{ font-size:.9rem; line-height:1.45; margin-top:.8rem; max-width:320px; }
+  .hero__ctas{ margin-top:1.2rem; gap:.6rem; }
+  .hero__ctas .btn-primary, .hero__ctas .btn-ghost{ padding:.6em 1.2em; font-size:.88rem; }
+  .hero__infobar{ margin-top:1.4rem; gap:.5rem; font-size:.78rem; }
+  .hero__infobar svg{ width:14px; height:14px; }
+  .nav__logo span{ font-size:1.05rem; line-height:1.15; }
+  .nav__logo-sub{ display:none; }
 }
