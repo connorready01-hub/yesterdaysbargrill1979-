@@ -363,6 +363,8 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
   overflow:hidden;
   white-space:nowrap;
   padding:.9rem 0;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+  mask-image:linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
 }
 .marquee__track{
   display:inline-flex;

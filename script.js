@@ -261,6 +261,21 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
+// Safety net: some mobile browsers can be unreliable about firing IntersectionObserver
+// callbacks in a timely way (especially right after a tab switch triggers a layout change).
+// Force-reveal anything still hidden shortly after it should reasonably be visible, so
+// content/photos never get stuck invisible waiting on an observer that didn't fire.
+function forceRevealVisible() {
+  document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200 && rect.bottom > -200) {
+      el.classList.add('is-visible');
+      revealObserver.unobserve(el);
+    }
+  });
+}
+setInterval(forceRevealVisible, 700);
+
 // ============ FOOTER YEAR ============
 document.getElementById('year').textContent = new Date().getFullYear();
 
