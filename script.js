@@ -337,7 +337,7 @@ function initDealsPopup() {
     let triggered = false;
     window.addEventListener('scroll', () => {
       if (triggered) return;
-      if (window.scrollY > window.innerHeight * 0.3) {
+      if (window.scrollY > window.innerHeight * 1.1) {
         triggered = true;
         openPopup();
       }
