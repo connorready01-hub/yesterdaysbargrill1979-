@@ -467,6 +467,7 @@ initAboutPhotoRotation();
 
 // ============ IMAGE FLYER LIGHTBOX (reusable) ============
 const hiringFlyerBtn = document.getElementById('hiringFlyerBtn');
+const tournamentStatBtn = document.getElementById('tournamentStatBtn');
 const hiringFlyerLightbox = document.getElementById('hiringFlyerLightbox');
 const hiringFlyerClose = document.getElementById('hiringFlyerClose');
 const flyerLightboxImg = document.getElementById('flyerLightboxImg');
@@ -481,6 +482,11 @@ function openFlyerLightbox(src, alt) {
 if (hiringFlyerBtn) {
   hiringFlyerBtn.addEventListener('click', () => {
     openFlyerLightbox('assets/hiring-flyer.png', "Now Hiring — All Positions at Yesterdays Bar & Grill, apply in person");
+  });
+}
+if (tournamentStatBtn) {
+  tournamentStatBtn.addEventListener('click', () => {
+    openFlyerLightbox('assets/gallery/gallery-61.jpg', "Aggieland Ducks Unlimited Pool & Dart Tournament flyer — Saturday August 22nd at Yesterdays Bar & Grill");
   });
 }
 if (hiringFlyerClose) {

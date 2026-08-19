@@ -28,7 +28,14 @@
 }
 
 *, *::before, *::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
+  width:100%;
+  max-width:100%;
+}
 
 body{
   margin:0;
@@ -37,6 +44,10 @@ body{
   font-family:'Work Sans', -apple-system, sans-serif;
   line-height:1.6;
   overflow-x:hidden;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
+  width:100%;
+  max-width:100%;
   position:relative;
 }
 
@@ -363,8 +374,6 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
   overflow:hidden;
   white-space:nowrap;
   padding:.9rem 0;
-  -webkit-mask-image:linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
-  mask-image:linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
 }
 .marquee__track{
   display:inline-flex;
@@ -389,7 +398,9 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
 .about{ background:var(--bg); }
 .about__grid{
   display:grid; grid-template-columns:1.1fr .9fr; gap:3.5rem; align-items:center;
+  min-width:0;
 }
+.about__grid > *{ min-width:0; }
 .about__copy p{ font-size:1.05rem; }
 .about__stats{
   display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:2rem;
@@ -400,6 +411,10 @@ section{ position:relative; padding:clamp(4rem,8vw,7rem) 0; }
   box-shadow:var(--shadow);
   transition:border-color .25s ease, transform .25s ease;
   display:block; text-decoration:none; color:inherit; cursor:default;
+  overflow:hidden;
+}
+.stat b, .stat span{
+  overflow-wrap:normal; word-break:normal;
 }
 a.stat{ cursor:pointer; }
 button.stat{
@@ -414,7 +429,7 @@ button.stat{
 }
 .stat__icon svg{ width:18px; height:18px; }
 .stat b{
-  display:block; font-family:'Rye',serif; font-size:1.5rem; color:var(--rust);
+  display:block; font-family:'Rye',serif; font-size:clamp(1.15rem, 5vw, 1.5rem); color:var(--rust);
 }
 .stat span{ font-size:.85rem; color:var(--ink-dim); letter-spacing:.02em; }
 
@@ -1141,4 +1156,28 @@ footer{ background:var(--rust-deep); border-top:1px solid var(--line); padding:2
   .hero__infobar svg{ width:14px; height:14px; }
   .nav__logo span{ font-size:1.05rem; line-height:1.15; }
   .nav__logo-sub{ display:none; }
+}
+
+/* ============================================================
+   GRID OVERFLOW FIX
+   CSS Grid tracks default to a minimum width based on their
+   content's natural (unwrapped) size, which can force a track —
+   and everything after it — wider than the actual screen on
+   narrow phones. Setting min-width:0 on grid children lets text
+   and content wrap/shrink normally instead of forcing overflow.
+   ============================================================ */
+.nav > *,
+.about__grid > *, .about__stats > *,
+.specials__grid > *, .specials__stack > *,
+.menu-grid > *, .cocktail-grid > *,
+.brunch__grid > *, .brunch__grid *,
+.events__grid > *,
+.tourney-banner > *, .tourney-banner__copy > *,
+.everyday-box__grid > *,
+.weekly-flyer > *,
+.games__grid > *,
+.calendar-grid > *,
+.visit__grid > *, .visit__grid *,
+.fb-feed__card > *{
+  min-width:0;
 }
