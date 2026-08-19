@@ -1,3 +1,16 @@
+// ============ ALWAYS START AT THE TOP ============
+// If the page loads with a URL hash (e.g. "#about"), browsers automatically
+// jump straight to that section on load, skipping past the hero entirely.
+// Since our own tab-switching code sets a hash on every navigation, simply
+// reloading the page (or revisiting a saved/shared link) would land partway
+// down the page instead of at the top. We still honor the hash to pick the
+// right tab (further down), but always force the scroll position itself
+// back to the very top so the hero is never skipped.
+window.scrollTo(0, 0);
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+
 // ============ NAV SCROLL STATE ============
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -79,6 +92,10 @@ if (homeLogoLink) {
 
 const initialTab = validTabs.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'about';
 activateTab(initialTab, false);
+window.scrollTo(0, 0);
+requestAnimationFrame(() => window.scrollTo(0, 0));
+setTimeout(() => window.scrollTo(0, 0), 150);
+setTimeout(() => window.scrollTo(0, 0), 400);
 
 // ============ GALLERY SLIDESHOW ============
 const galleryPhotos = [
