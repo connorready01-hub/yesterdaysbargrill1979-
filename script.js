@@ -6,10 +6,30 @@
 // down the page instead of at the top. We still honor the hash to pick the
 // right tab (further down), but always force the scroll position itself
 // back to the very top so the hero is never skipped.
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 window.scrollTo(0, 0);
 window.addEventListener('load', () => {
   window.scrollTo(0, 0);
 });
+// Real devices can take longer to finish loading images/fonts than a local
+// test does, and the page's height (and any lingering hash-jump) can keep
+// shifting during that time. Keep re-asserting the top position briefly
+// after load, but stop the instant the person actually tries to scroll —
+// this only ever corrects an unwanted automatic jump, never fights a real
+// scroll gesture.
+let scrollLockUntil = Date.now() + 1500;
+let userInteracted = false;
+['touchstart', 'wheel', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, () => { userInteracted = true; }, { passive: true, once: true });
+});
+function enforceScrollTop() {
+  if (userInteracted || Date.now() > scrollLockUntil) return;
+  if (window.scrollY > 0) window.scrollTo(0, 0);
+  requestAnimationFrame(enforceScrollTop);
+}
+requestAnimationFrame(enforceScrollTop);
 
 // ============ NAV SCROLL STATE ============
 const nav = document.getElementById('nav');
