@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 560" width="500" height="560">
+  <rect width="500" height="560" fill="#fdf8ee"/>
+
+  <g fill="#a53a26">
+    <ellipse cx="290" cy="95" rx="58" ry="52"/>
+    <path d="M232 90 Q225 40 270 32 Q300 10 330 35 Q360 45 350 85 Q356 110 336 118 Q345 90 320 78 Q325 60 300 55 Q280 45 262 58 Q244 62 244 85 Q238 100 232 90 Z"/>
+
+    <path d="M255 145 Q290 130 325 145 L340 175 Q350 230 345 300 L340 340 L235 340 L232 300 Q228 230 238 175 Z"/>
+
+    <path d="M235 175 Q210 190 200 230 L192 340 L222 340 L232 240 Z"/>
+    <path d="M345 175 Q372 190 380 235 Q382 270 372 300 Q378 320 400 328 L398 344 Q362 340 352 305 Q345 260 345 210 Z"/>
+
+    <rect x="178" y="115" width="9" height="225" rx="4"/>
+    <ellipse cx="182.5" cy="112" rx="7" ry="7"/>
+
+    <path d="M215 340 L400 340 L400 352 L215 352 Z"/>
+  </g>
+
+  <g fill="none" stroke="#fdf8ee" stroke-width="3" stroke-linecap="round">
+    <path d="M270 100 Q282 108 296 100"/>
+    <path d="M272 118 Q285 126 300 116"/>
+    <path d="M300 70 L300 100"/>
+    <path d="M285 150 L285 250"/>
+    <path d="M255 160 Q270 220 262 320"/>
+    <path d="M325 160 Q315 220 322 320"/>
+  </g>
+
+  <rect x="20" y="382" width="460" height="6" fill="#a53a26"/>
+  <rect x="20" y="466" width="460" height="6" fill="#a53a26"/>
+  <rect x="20" y="382" width="6" height="90" fill="#a53a26"/>
+  <rect x="474" y="382" width="6" height="90" fill="#a53a26"/>
+
+  <text x="250" y="450" text-anchor="middle" font-family="'Rye', serif" font-size="72" fill="#a53a26">YESTERDAYS</text>
+
+  <text x="250" y="520" text-anchor="middle" font-family="'Playfair Display', serif" font-style="italic" font-size="24" fill="#2a1d16">&#8220;A fine entertainment establishment&#8221;</text>
+</svg>
