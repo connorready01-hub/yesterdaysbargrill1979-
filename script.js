@@ -375,8 +375,26 @@ const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','S
 
 function initDealsPopup() {
   const today = new Date().getDay();
-  const deal = dailyDeals[today];
+  let deal = dailyDeals[today];
   if (!deal) return;
+
+  // One-day-only special: adds extra info to today's popup without touching
+  // the permanent daily deals data above. This naturally stops applying
+  // after today passes — nothing to remember to clean up later.
+  const now = new Date();
+  const isMNFDay = now.getFullYear() === 2026 && now.getMonth() === 8 && now.getDate() === 14; // Sept 14, 2026
+  if (isMNFDay) {
+    deal = {
+      title: 'Singo Night + Chiefs vs. Broncos, 7:15pm',
+      items: [
+        '<b>$1</b> Wings — 30 min before kickoff thru end of game',
+        '<b>$4</b> Domestic Drafts + Freezer Shots',
+        '<b>$4</b> Fireball, Jäger, Skrewball &amp; Texas Ranger Flavors',
+        '<b>$2</b> Footlong Corndog',
+        'Singo (musical bingo) 7–10pm'
+      ]
+    };
+  }
 
   const popupEl = document.getElementById('dealsPopup');
   const titleEl = document.getElementById('dealsPopupTitle');
@@ -432,7 +450,7 @@ initDealsPopup();
 // ============ CALENDAR MODAL ============
 const calendarDayOfWeekInfo = {
   0: { title: 'Sunday Funday & Queen of Hearts', text: "$10 Mimosa Pitcher, $3 Margaritas, $4.50 Bloody Mary, free pool til 2pm, DJ Rob starts 2pm, and the Queen of Hearts Raffle 1–4pm (drawing at 4pm)." },
-  1: { title: 'Singo Night', text: 'Bingo with a musical twist, 7–10pm. $4 domestic drafts, $4 Fireball/Jäger/Skrewball/Texas Ranger, $2 footlong corndogs.' },
+  1: { title: 'Singo Night & Monday Night Football', text: 'Bingo with a musical twist, 7–10pm, plus MNF wing specials. $1 wings 30 min before kickoff thru end of game, $4 domestic drafts, $4 Fireball/Jäger/Skrewball/Texas Ranger, $2 footlong corndogs.' },
   3: { title: 'Karaoke Night', text: '$3 wells, $3.50 domestic bottles, and half off appetizers all night long.' },
   5: { title: 'Live Music Fridays', text: 'Live music 8–11pm on the patio, plus the full food & cocktail menu all night.' }
 };
