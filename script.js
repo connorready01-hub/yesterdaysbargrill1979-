@@ -363,7 +363,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // ============ TODAY'S DEALS POPUP ============
 const dailyDeals = {
-  0: { title: "Sunday Funday", items: ['<b>$10</b> Mimosa Pitcher', '<b>$3</b> Margaritas', '<b>$4.50</b> Bloody Mary', '<b>$1</b> Hotdogs', 'Free pool til 2pm · DJ Rob starts 2pm', 'Queen of Hearts Raffle 1–4pm · drawing at 4pm'] },
+  0: { title: "Sunday Funday", items: ['<b>$10</b> Mimosa Pitcher', '<b>$3</b> Margaritas', '<b>$4.50</b> Bloody Mary', '<b>$1</b> Hotdogs', 'Free pool til 2pm · DJ Rob starts 2pm', 'Shrimp &amp; Crab Boil at 2pm · Crab <b>$33</b>/lb, Shrimp <b>$22</b>/lb, Fixins <b>$3.99</b>', 'Queen of Hearts Raffle 1–4pm · drawing at 4pm'] },
   1: { title: "Singo Night", items: ['<b>$4</b> Domestic Drafts + Freezer Shots', '<b>$2</b> Footlong Corndog', 'Singo (musical bingo) 7–10pm'] },
   2: { title: "Texas Night", items: ['<b>$5</b> Texas Liquor', '<b>$1 off</b> Texas Beer', '<b>$15</b> BOGO Yesterdays Burger', 'Free pool w/ college ID'] },
   3: { title: "Karaoke Night", items: ['<b>$3</b> Wells', '<b>$3.50</b> Domestic Bottles', '<b>½ off</b> Appetizers', 'Karaoke kicks off 8pm'] },
@@ -372,6 +372,31 @@ const dailyDeals = {
   6: { title: "Saturday on the Patio", items: ['Full food & cocktail menu', 'Pool, darts & shuffleboard all day', 'Brunch bar back tomorrow 10am–2pm'] }
 };
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+// ============ LIMITED-TIME POPUP ANNOUNCEMENT ============
+// Shows a highlighted announcement at the top of the deals popup, and opens the
+// popup a moment after the page loads (instead of waiting for a scroll) so
+// people see it right away. It switches itself on and off by date — once the end
+// date passes, the popup goes back to normal with just the deals for the day.
+// To change it: edit the dates/text below. To turn it off early: set it to null.
+// Dates are YYYY-MM-DD and include both the start and end day.
+const popupAnnouncement = {
+  start: '2026-09-18',
+  end: '2026-10-18',
+  eyebrow: 'NEW',
+  title: 'Shrimp & Crab Boils',
+  text: "Every Sunday at 2pm — come get some!<br><b>Crab $33/lb</b> · <b>Shrimp $22/lb</b> · <b>Fixins $3.99</b>",
+  linkText: 'See the flyer & prices'
+};
+
+function announcementIsActive() {
+  const a = popupAnnouncement;
+  if (!a) return false;
+  const n = new Date();
+  const pad = v => String(v).padStart(2, '0');
+  const todayStr = `${n.getFullYear()}-${pad(n.getMonth() + 1)}-${pad(n.getDate())}`;
+  return todayStr >= a.start && todayStr <= a.end;
+}
 
 function initDealsPopup() {
   const today = new Date().getDay();
@@ -405,6 +430,15 @@ function initDealsPopup() {
   const fabEl = document.getElementById('dealsFab');
   if (!popupEl) return;
 
+  const announce = announcementIsActive();
+  if (announce) {
+    popupEl.classList.add('deals-popup--promo');
+    document.getElementById('dealsPromoEyebrow').textContent = popupAnnouncement.eyebrow;
+    document.getElementById('dealsPromoTitle').textContent = popupAnnouncement.title;
+    document.getElementById('dealsPromoText').innerHTML = popupAnnouncement.text;
+    document.getElementById('dealsPromoLink').textContent = popupAnnouncement.linkText;
+  }
+
   titleEl.textContent = `${dayNames[today]} — ${deal.title}`;
   listEl.innerHTML = deal.items.map(item => `<li>${item}</li>`).join('');
 
@@ -425,6 +459,8 @@ function initDealsPopup() {
 
   closeBtn.addEventListener('click', closePopup);
   linkEl.addEventListener('click', closePopup);
+  const promoLinkEl = document.getElementById('dealsPromoLink');
+  if (promoLinkEl) promoLinkEl.addEventListener('click', closePopup);
   if (tourneyBtn) tourneyBtn.addEventListener('click', closePopup);
   fabEl.addEventListener('click', openPopup);
 
@@ -433,6 +469,9 @@ function initDealsPopup() {
 
   if (alreadySeenToday) {
     fabEl.classList.add('show');
+  } else if (announce) {
+    // announcement running: pop up shortly after the page loads
+    setTimeout(openPopup, 1200);
   } else {
     let triggered = false;
     window.addEventListener('scroll', () => {
@@ -449,7 +488,7 @@ initDealsPopup();
 
 // ============ CALENDAR MODAL ============
 const calendarDayOfWeekInfo = {
-  0: { title: 'Sunday Funday & Queen of Hearts', text: "$10 Mimosa Pitcher, $3 Margaritas, $4.50 Bloody Mary, free pool til 2pm, DJ Rob starts 2pm, and the Queen of Hearts Raffle 1–4pm (drawing at 4pm)." },
+  0: { title: 'Sunday Funday & Queen of Hearts', text: "$10 Mimosa Pitcher, $3 Margaritas, $4.50 Bloody Mary, free pool til 2pm, DJ Rob starts 2pm, Shrimp & Crab Boils at 2pm (crab $33/lb, shrimp $22/lb, fixins $3.99), and the Queen of Hearts Raffle 1–4pm (drawing at 4pm)." },
   1: { title: 'Singo Night & Monday Night Football', text: 'Bingo with a musical twist, 7–10pm, plus MNF wing specials. $1 wings 30 min before kickoff thru end of game, $4 domestic drafts, $4 Fireball/Jäger/Skrewball/Texas Ranger, $2 footlong corndogs.' },
   3: { title: 'Karaoke Night', text: '$3 wells, $3.50 domestic bottles, and half off appetizers all night long.' },
   5: { title: 'Live Music Fridays', text: 'Live music 8–11pm on the patio, plus the full food & cocktail menu all night.' }

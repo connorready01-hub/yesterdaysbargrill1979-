@@ -652,7 +652,7 @@ button.stat{
 .specials__stack .tourney-banner,
 .specials__stack .everyday-box{ margin-top:0; }
 
-#tournamentBanner{ scroll-margin-top:140px; }
+#tournamentBanner, #boilBanner{ scroll-margin-top:140px; }
 .tourney-banner{
   display:grid; grid-template-columns:280px 1fr; gap:2rem; align-items:center;
   margin-top:2.5rem; padding:1.8rem; background:var(--bg-card);
@@ -667,6 +667,18 @@ button.stat{
 .tourney-banner__copy ul li{ font-size:.92rem; color:var(--ink); padding-left:1.2rem; position:relative; }
 .tourney-banner__copy ul li::before{ content:"—"; position:absolute; left:0; color:var(--rust); }
 .tourney-banner__copy ul li b{ color:var(--rust); }
+/* "NEW" tag that sits on the top border of a banner */
+.tourney-banner--new{ position:relative; }
+.new-badge{
+  position:absolute; top:-15px; left:1.6rem; z-index:2;
+  padding:.4rem 1.1rem; border-radius:999px;
+  background:var(--rust); color:#fff8ea;
+  font-family:'Work Sans',sans-serif; font-weight:700; font-size:.82rem;
+  letter-spacing:.22em; line-height:1;
+  border:2px solid var(--bg-card);
+  box-shadow:0 6px 14px rgba(42,25,15,0.25);
+  transform:rotate(-3deg);
+}
 @media (max-width:760px){
   .tourney-banner{ grid-template-columns:1fr; }
   .tourney-banner img{ max-width:280px; margin:0 auto; }
@@ -1008,6 +1020,25 @@ footer{ background:var(--rust-deep); border-top:1px solid var(--line); padding:2
 .deals-popup__tourney-btn{
   display:block; text-align:center; margin-top:1rem;
   padding:.6em 1em; font-size:.85rem;
+}
+
+/* Limited-time announcement shown at the top of the popup (see popupAnnouncement in script.js) */
+.deals-popup__card{ max-height:calc(100vh - 2.8rem); overflow-y:auto; }
+.deals-popup__promo{
+  display:none; margin:1.2rem 0 0; padding:1rem 1.1rem 1.05rem;
+  background:var(--rust); color:#fff8ec; border-radius:calc(var(--radius) - 4px);
+}
+.deals-popup--promo .deals-popup__promo{ display:block; }
+.deals-popup__promo-eyebrow{
+  font-family:'Work Sans',sans-serif; font-size:.68rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; color:#f6d7a6;
+}
+.deals-popup__promo-title{ font-family:'Rye',serif; font-size:1.3rem; margin:.3rem 0 .45rem; line-height:1.15; }
+.deals-popup__promo-text{ font-family:'Work Sans',sans-serif; font-size:.88rem; line-height:1.5; margin:0 0 .7rem; color:#fff8ec; }
+.deals-popup__promo-text b{ color:#fff; white-space:nowrap; }
+.deals-popup__promo-link{
+  font-family:'Work Sans',sans-serif; font-weight:700; font-size:.85rem;
+  color:#fff8ec; text-decoration:underline; text-underline-offset:3px; cursor:pointer;
 }
 
 .deals-fab{
