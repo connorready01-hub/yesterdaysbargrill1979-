@@ -1232,3 +1232,59 @@ footer{ background:var(--rust-deep); border-top:1px solid var(--line); padding:2
 .fb-feed__card > *{
   min-width:0;
 }
+
+
+/* ============ EVENT FLYERS (corner tab, popup button, flyer viewer) ============ */
+.deals-popup__flyer{
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+  width:100%; margin-top:1rem; padding:.8rem 1rem;
+  background:var(--bg-alt); color:var(--ink); border:1px solid var(--line-strong); border-left:4px solid var(--rust); border-radius:calc(var(--radius) - 4px);
+  font-family:'Work Sans',sans-serif; text-align:left; cursor:pointer;
+}
+.deals-popup__flyer[hidden]{ display:none; }
+.deals-popup__flyer:hover{ background:#e8dabe; }
+.deals-popup__flyer-text{ display:flex; flex-direction:column; gap:.15rem; min-width:0; }
+.deals-popup__flyer-eyebrow{ font-size:.66rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--rust); }
+.deals-popup__flyer-title{ font-size:.92rem; font-weight:600; line-height:1.3; }
+.deals-popup__flyer-cta{
+  flex:none; font-size:.8rem; font-weight:700; padding:.45em .85em; border-radius:999px;
+  background:var(--rust); color:#fff8ec; white-space:nowrap;
+}
+
+.event-tab{
+  position:fixed; left:1.4rem; bottom:1.4rem; z-index:150;
+  display:flex; align-items:center; gap:.6rem; padding:.55rem 1rem .55rem .6rem;
+  background:#f5c518; color:#3a1a10; border:2px solid #8f2416; border-radius:999px;
+  box-shadow:var(--shadow); cursor:pointer; font-family:'Work Sans',sans-serif; text-align:left;
+  transition:transform .2s ease;
+}
+.event-tab[hidden]{ display:none; }
+.event-tab:hover{ transform:translateY(-2px); }
+.event-tab__icon{
+  width:32px; height:32px; border-radius:999px; background:#8f2416; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:1rem; flex:none;
+}
+.event-tab__text{ display:flex; flex-direction:column; line-height:1.15; }
+.event-tab__title{ font-weight:700; font-size:.85rem; }
+.event-tab__date{ font-weight:600; font-size:.72rem; color:#8f2416; }
+
+.flyer-modal{ position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:1.2rem; }
+.flyer-modal[hidden]{ display:none; }
+.flyer-modal__backdrop{ position:absolute; inset:0; background:rgba(20,12,8,.82); }
+.flyer-modal__frame{ position:relative; max-width:min(560px, 100%); max-height:100%; display:flex; }
+.flyer-modal__img{
+  display:block; max-width:100%; max-height:calc(100vh - 2.4rem); width:auto; height:auto;
+  border-radius:10px; box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.flyer-modal__close{
+  position:absolute; top:-14px; right:-14px; width:38px; height:38px; border-radius:999px;
+  background:#fffcf5; color:var(--ink); border:none; box-shadow:var(--shadow); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.flyer-modal__close svg{ width:18px; height:18px; }
+
+@media (max-width:560px){
+  .event-tab{ left:.9rem; bottom:.9rem; padding:.45rem .8rem .45rem .45rem; }
+  .event-tab__icon{ width:28px; height:28px; }
+  .flyer-modal__close{ top:8px; right:8px; }
+}

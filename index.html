@@ -42,12 +42,37 @@
       <p class="deals-popup__promo-text" id="dealsPromoText"></p>
       <a href="#specials" data-tab="specials" data-anchor="boilBanner" class="deals-popup__promo-link" id="dealsPromoLink">See the flyer &amp; prices</a>
     </div>
+    <button type="button" class="deals-popup__flyer" id="dealsFlyerBtn" hidden>
+      <span class="deals-popup__flyer-text">
+        <span class="deals-popup__flyer-eyebrow" id="dealsFlyerEyebrow"></span>
+        <span class="deals-popup__flyer-title" id="dealsFlyerTitle"></span>
+      </span>
+      <span class="deals-popup__flyer-cta">See flyer</span>
+    </button>
   </div>
 </div>
 <button class="deals-fab" id="dealsFab" aria-label="Show today's deals">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h11v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M16 10h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/></svg>
   <span>Today's Deals</span>
 </button>
+
+<button type="button" class="event-tab" id="eventTab" hidden>
+  <span class="event-tab__icon" id="eventTabIcon" aria-hidden="true"></span>
+  <span class="event-tab__text">
+    <span class="event-tab__title" id="eventTabTitle"></span>
+    <span class="event-tab__date" id="eventTabDate"></span>
+  </span>
+</button>
+
+<div class="flyer-modal" id="flyerModal" role="dialog" aria-modal="true" aria-label="Event flyer" hidden>
+  <div class="flyer-modal__backdrop" id="flyerModalBackdrop"></div>
+  <div class="flyer-modal__frame">
+    <button type="button" class="flyer-modal__close" id="flyerModalClose" aria-label="Close flyer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img class="flyer-modal__img" id="flyerModalImg" src="" alt="">
+  </div>
+</div>
 
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
@@ -191,7 +216,7 @@
     </div>
     <div class="about__visual reveal">
       <div class="about__collage">
-        <img id="aboutMainPhoto" class="collage__img collage__img--main" src="assets/gallery/gallery-56.png" alt="Two friends holding Miller High Life bottles" loading="lazy" onerror="this.closest('.collage__img').style.display='none'">
+        <img id="aboutMainPhoto" class="collage__img collage__img--main" src="assets/gallery/gallery-75.jpg" alt="Group of friends at a booth table at Yesterdays Bar & Grill" loading="lazy" onerror="this.closest('.collage__img').style.display='none'">
         <img class="collage__img collage__img--top" src="assets/gallery/gallery-49.png" alt="Burger and fries with a Budweiser draft beer" loading="lazy" onerror="this.style.display='none'">
         <img class="collage__img collage__img--bottom" src="assets/patio.jpg" alt="Yesterdays Bar & Grill patio seating" loading="lazy" onerror="this.style.display='none'">
       </div>
