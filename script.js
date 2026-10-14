@@ -164,8 +164,6 @@ setTimeout(() => window.scrollTo(0, 0), 400);
 
 // ============ GALLERY SLIDESHOW ============
 const galleryPhotos = [
-  { src: 'assets/gallery/gallery-74.jpg', alt: 'Queen of Hearts Raffle winner holding the queen of hearts card at Yesterdays Bar & Grill' },
-  { src: 'assets/gallery/gallery-75.jpg', alt: 'Group of friends at a booth table at Yesterdays Bar & Grill' },
   { src: 'assets/gallery/gallery-60.jpeg', alt: 'Pool hall with multiple tables at Yesterdays Bar & Grill' },
   { src: 'assets/gallery/gallery-62.png', alt: 'Yesterdays staff smiling with liquor bottles on the patio' },
   { src: 'assets/gallery/gallery-63.jpg', alt: 'Queen of Hearts Raffle flyer, every Sunday 1-4pm' },
@@ -375,44 +373,29 @@ const dailyDeals = {
 };
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// ============ POPUP ANNOUNCEMENTS ============
+// ============ LIMITED-TIME POPUP ANNOUNCEMENT ============
 // Shows a highlighted announcement at the top of the deals popup, and opens the
 // popup a moment after the page loads (instead of waiting for a scroll) so
-// people see it right away. Each entry only shows on the day(s) listed in `days`
-// (0=Sunday...6=Saturday), and within its start/end date range. If more than one
-// entry matches the same day, the first match wins.
-// To change one: edit the days/dates/text below. To remove one: delete its entry.
+// people see it right away. It switches itself on and off by date — once the end
+// date passes, the popup goes back to normal with just the deals for the day.
+// To change it: edit the dates/text below. To turn it off early: set it to null.
 // Dates are YYYY-MM-DD and include both the start and end day.
-const popupAnnouncements = [
-  {
-    start: '2026-09-18',
-    end: '2026-10-18',
-    days: [0], // Sunday only
-    eyebrow: 'NEW',
-    title: 'Shrimp & Crab Boils',
-    text: "Every Sunday at 2pm — come get some!<br><b>Crab $33/lb</b> · <b>Shrimp $22/lb</b> · <b>Fixins $3.99</b>",
-    linkText: 'See the flyer & prices',
-    anchor: 'boilBanner'
-  },
-  {
-    start: '2026-09-01',
-    end: '2027-02-15', // NFL season through the Super Bowl; adjust each year
-    days: [1], // Monday only
-    eyebrow: 'NFL MONDAY',
-    title: 'Dollar Wings',
-    text: "$1 wings during tonight's game — kickoff to final whistle!",
-    linkText: 'See all Daily Deals',
-    anchor: null
-  }
-];
+const popupAnnouncement = {
+  start: '2026-09-18',
+  end: '2026-10-18',
+  eyebrow: 'NEW',
+  title: 'Shrimp & Crab Boils',
+  text: "Every Sunday at 2pm — come get some!<br><b>Crab $33/lb</b> · <b>Shrimp $22/lb</b> · <b>Fixins $3.99</b>",
+  linkText: 'See the flyer & prices'
+};
 
-function getActiveAnnouncement() {
+function announcementIsActive() {
+  const a = popupAnnouncement;
+  if (!a) return false;
   const n = new Date();
   const pad = v => String(v).padStart(2, '0');
   const todayStr = `${n.getFullYear()}-${pad(n.getMonth() + 1)}-${pad(n.getDate())}`;
-  return popupAnnouncements.find(a =>
-    todayStr >= a.start && todayStr <= a.end && a.days.includes(n.getDay())
-  ) || null;
+  return todayStr >= a.start && todayStr <= a.end;
 }
 
 function initDealsPopup() {
@@ -447,16 +430,13 @@ function initDealsPopup() {
   const fabEl = document.getElementById('dealsFab');
   if (!popupEl) return;
 
-  const announce = getActiveAnnouncement();
+  const announce = announcementIsActive();
   if (announce) {
     popupEl.classList.add('deals-popup--promo');
-    document.getElementById('dealsPromoEyebrow').textContent = announce.eyebrow;
-    document.getElementById('dealsPromoTitle').textContent = announce.title;
-    document.getElementById('dealsPromoText').innerHTML = announce.text;
-    const promoLinkEl2 = document.getElementById('dealsPromoLink');
-    promoLinkEl2.textContent = announce.linkText;
-    if (announce.anchor) promoLinkEl2.setAttribute('data-anchor', announce.anchor);
-    else promoLinkEl2.removeAttribute('data-anchor');
+    document.getElementById('dealsPromoEyebrow').textContent = popupAnnouncement.eyebrow;
+    document.getElementById('dealsPromoTitle').textContent = popupAnnouncement.title;
+    document.getElementById('dealsPromoText').innerHTML = popupAnnouncement.text;
+    document.getElementById('dealsPromoLink').textContent = popupAnnouncement.linkText;
   }
 
   titleEl.textContent = `${dayNames[today]} — ${deal.title}`;
@@ -602,7 +582,7 @@ document.addEventListener('keydown', (e) => {
 
 // ============ ABOUT PAGE PHOTO ROTATION (changes weekly) ============
 const aboutPhotoRotation = [
-  { src: 'assets/gallery/gallery-75.jpg', alt: "Group of friends at a booth table at Yesterdays Bar & Grill" },
+  { src: 'assets/gallery/gallery-62.png', alt: "Yesterdays staff smiling with liquor bottles on the patio" },
   { src: 'assets/gallery/gallery-54.png', alt: 'Friends in Texas A&M jerseys sitting outside' },
   { src: 'assets/gallery/gallery-56.png', alt: 'Two friends holding Miller High Life bottles' },
   { src: 'assets/gallery/gallery-55.png', alt: 'Friends at the bar holding bottles' },
