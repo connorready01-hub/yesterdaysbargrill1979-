@@ -661,6 +661,18 @@ document.addEventListener('keydown', (e) => {
 // placement 'popup'  = a "See flyer" button inside the Today's Deals popup
 const eventFlyers = [
   {
+    // Halloween Spirit Week: takes the corner spot until Sat 10/31, then the chili tab returns
+    placement: 'corner',
+    showFrom: '2026-10-20',
+    showUntil: '2026-10-31',
+    icon: '👻',
+    style: 'spooky',
+    title: 'Spirit Week',
+    date: 'Oct 25 – 31 · see themes',
+    image: 'assets/spirit-week-flyer.jpg',
+    alt: 'Halloween Spirit Week at Yesterdays, Oct 25 to 31: Sunday Jersey Day, Monday Back to the Basics, Tuesday Yesterdays Gone Wild, Wednesday Early 2000s Pop, Thursday Decades Night, Friday Saints and Sinners, Saturday Halloween costumes'
+  },
+  {
     placement: 'corner',
     showUntil: '2027-01-16',
     icon: '🌶️',
@@ -683,7 +695,7 @@ const eventFlyers = [
   const pad = v => String(v).padStart(2, '0');
   const n = new Date();
   const todayStr = `${n.getFullYear()}-${pad(n.getMonth() + 1)}-${pad(n.getDate())}`;
-  const active = place => eventFlyers.find(f => f.placement === place && todayStr <= f.showUntil);
+  const active = place => eventFlyers.find(f => f.placement === place && (!f.showFrom || todayStr >= f.showFrom) && todayStr <= f.showUntil);
 
   const modal = document.getElementById('flyerModal');
   const modalImg = document.getElementById('flyerModalImg');
@@ -711,6 +723,7 @@ const eventFlyers = [
     document.getElementById('eventTabIcon').textContent = corner.icon || '';
     document.getElementById('eventTabTitle').textContent = corner.title;
     document.getElementById('eventTabDate').textContent = corner.date;
+    if (corner.style) tab.classList.add('event-tab--' + corner.style);
     tab.setAttribute('aria-label', `See the ${corner.title} flyer`);
     tab.hidden = false;
     tab.addEventListener('click', () => openFlyer(corner));
